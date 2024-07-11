@@ -17,7 +17,7 @@
             @csrf
 
             <div>
-                <h1 class="text-xl font-bold mb-4">Iniciar sección</h1>
+                <h1 class="text-xl font-bold mb-4">Iniciar sesión</h1>
                 {{-- <x-label for="email" value="{{ __('Email') }}" /> --}}
                 <x-label>
                     Correo electrónico

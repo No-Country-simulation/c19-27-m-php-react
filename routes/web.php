@@ -22,11 +22,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-
-
-
-
 
 
 Route::middleware([
@@ -38,6 +33,11 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+
 
 
 

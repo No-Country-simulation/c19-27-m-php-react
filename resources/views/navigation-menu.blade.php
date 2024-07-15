@@ -1,9 +1,9 @@
 @php
       $links = [
         [
-          'name' => 'Dashboard',
-          'url' => route('dashboard'),
-          'active' => request()->routeIs('dashboard'),
+          'name' => 'Principal',
+          'url' => route('products.index'),
+          'active' => request()->routeIs('products.index'),
         ],
     ];    
 @endphp
@@ -14,7 +14,7 @@
         <div class="flex justify-between h-16 items-center">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="{{ route('dashboard') }}">
+                <a href="{{ route('products.index') }}">
                     <img src="{{ asset('theme-admin/img/logo-type.png') }}" alt="logo" class="w-22 h-12">
                 </a>
             </div>
@@ -43,7 +43,7 @@
                                         <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                     </button>
                                 @else
-                                    <span class="inline-flex rounded-md">
+                                    <span class="inline-flex rounded-md relative">
                                         <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
                                             {{ Auth::user()->name }}
     

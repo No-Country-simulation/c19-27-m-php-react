@@ -2,6 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -18,9 +19,6 @@ use App\Http\Controllers\ProductController;
 // Route::get('/home', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 
@@ -34,8 +32,9 @@ Route::middleware([
     })->name('dashboard');
 });
 
-
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+//Rutas publicas
+Route::get('/', [PublicController::class, 'index'])->name('products.index');
+Route::get('/products', [PublicController::class, 'products'])->name('products.index');
 
 
 

@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -12,11 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //  dd ('hello');
-      
-        $products = Product::paginate(15);
-
-        return view('products.index', compact('products'));
+        
     }
 
     /**

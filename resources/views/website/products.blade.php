@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
             <!-- Tarjetas -->
             @foreach ($products as $product)
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-white rounded-sm shadow-md overflow-hidden">
                 <img src="{{ $product->image }}" alt="Imagen" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h2 class="text-lg font-bold mb-2">{{ $product->name }}</h2>

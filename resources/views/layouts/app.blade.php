@@ -31,6 +31,9 @@
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu')
 
+              <!-- Include Gray Bar Component -->
+        <x-gray-bar />
+
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">

@@ -29,8 +29,16 @@
                 </button>
             </div>
 
-            <!-- Authentication Links / User Dropdown -->
+            <!-- Authentication Links / User Dropdown / Shopping Cart -->
             <div class="flex items-center space-x-4">
+                <!-- Shopping Cart -->
+                <div class="relative">
+                    <a href="#" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                        <i class="fa-solid fa-cart-shopping w-6 h-6"></i>
+
+                    </a>
+                </div>
+
                 @auth
                     <!-- Settings Dropdown -->
                     <div class="relative">
@@ -141,4 +149,5 @@
         </div>
     @endauth
 </nav>
+
 

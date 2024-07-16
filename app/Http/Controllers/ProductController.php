@@ -14,8 +14,7 @@ class ProductController extends Controller
     {
         //  dd ('hello');
       
-        $products = Product::all();
-                    // ->paginate(16);
+        $products = Product::paginate(15);
 
         return view('products.index', compact('products'));
     }

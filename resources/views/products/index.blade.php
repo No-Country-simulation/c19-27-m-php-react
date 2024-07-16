@@ -24,5 +24,7 @@
     <script src="{{ mix('js/app.js') }}"></script>
 
 
-
+<div class="mb-4">
+    {{ $products->links() }}
+</div>
 </x-app-layout>

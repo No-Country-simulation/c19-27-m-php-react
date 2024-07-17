@@ -2,8 +2,8 @@
       $links = [
         [
           'name' => 'Principal',
-          'url' => route('products.index'),
-          'active' => request()->routeIs('products.index'),
+          'url' => route('website.index'),
+          'active' => request()->routeIs('website.index'),
         ],
     ];    
 @endphp
@@ -14,7 +14,7 @@
         <div class="flex justify-between h-16 items-center">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="{{ route('products.index') }}">
+                <a href="{{ route('website.index') }}">
                     <img src="{{ asset('theme-admin/img/logo-type.png') }}" alt="logo" class="w-22 h-12">
                 </a>
             </div>
@@ -109,7 +109,7 @@
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
                 <!-- Aquí puedes agregar enlaces de navegación responsivos -->
-                <x-responsive-nav-link href="{{ route('products.index') }}" :active="request()->routeIs('products.index')">
+                <x-responsive-nav-link href="{{ route('website.index') }}" :active="request()->routeIs('products.index')">
                     {{ __('Products') }}
                 </x-responsive-nav-link>
             </div>

@@ -42,11 +42,8 @@ Route::get('/products', [PublicController::class, 'products'])->name('website.pr
 
 //Productos
 Route::get('/products', [ProductController::class, 'index'])->name('admin.product.index');
+Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard.dashboard');
 
-
-
-    Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard.dashboard');
-});
 
 //Rutas publicas
 Route::get('/', [PublicController::class, 'index'])->name('website.index');

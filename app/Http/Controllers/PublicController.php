@@ -15,9 +15,18 @@ class PublicController extends Controller
         $products = Product::paginate(15);
         return view('website.index', compact('products'));
     }
-    public function products()
+
+    public function products(Request $request)
     {
-        $products = Product::paginate(15);
+        $searchTerm = $request->input('search');
+        
+        if ($searchTerm) {
+            $products = Product::where('name', 'ILIKE', "%{$searchTerm}%")
+                ->paginate(15);
+        } else {
+            $products = Product::paginate(15);
+        }
+
         return view('website.products', compact('products'));
     }
 

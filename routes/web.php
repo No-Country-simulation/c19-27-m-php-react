@@ -1,6 +1,10 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,16 +17,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
-    return view('welcome');
-});
+// Route::get('/home', function () {
+//     return view('welcome');
+// });
 
+
+//Rutas privadas
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard.dashboard');
 });
+
+//Rutas publicas
+Route::get('/', [PublicController::class, 'index'])->name('website.index');
+Route::get('/products', [PublicController::class, 'products'])->name('website.products');
+
+
+
+
+
+
+//Productos
+Route::get('/products', [ProductController::class, 'index'])->name('admin.product.index');
+
+
+

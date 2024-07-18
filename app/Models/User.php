@@ -60,8 +60,8 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function cars():HasMany{
-        return $this->hasMany(Car::class);
+    public function carts():HasMany{
+        return $this->hasMany(Cart::class);
     }
 
     public function bills():HasMany{

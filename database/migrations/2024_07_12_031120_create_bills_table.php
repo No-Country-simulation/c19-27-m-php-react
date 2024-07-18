@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamp('date');
             $table->float('total');
             $table->boolean('state');
-            $table->foreignId('user_iduser')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

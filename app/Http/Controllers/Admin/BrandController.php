@@ -1,21 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Models\User;
 
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::paginate(15);
+        $brands = Brand::paginate();
 
-        return view('admin.user.index', compact('users'));
+        return view('admin.brand.index', compact('brands'));
     }
 
     /**

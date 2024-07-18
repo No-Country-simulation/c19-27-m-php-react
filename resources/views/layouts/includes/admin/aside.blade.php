@@ -14,20 +14,20 @@
       ],
       [
       'name' => 'Categorías',
-      //   'url' => route('#'),
-      //   'active' => request()->routeIs('#'),
+        'url' => route('admin.categories.index'),
+        'active' => request()->routeIs('admin.categories.*'),
         'icon' => 'fa-solid fa-list',
       ],
       [
       'name' => 'Marcas',
-      //   'url' => route('#'),
-      //   'active' => request()->routeIs('#'),
+        'url' => route('admin.brands.index'),
+        'active' => request()->routeIs('admin.brands.*'),
         'icon' => 'fa-solid fa-copyright',
       ],
       [
       'name' => 'Usuarios',
-      //   'url' => route('#'),
-      //   'active' => request()->routeIs('#'),
+        'url' => route('admin.users.index'),
+        'active' => request()->routeIs('admin.users.*'),
         'icon' => 'fa-solid fa-users',
       ],
       [

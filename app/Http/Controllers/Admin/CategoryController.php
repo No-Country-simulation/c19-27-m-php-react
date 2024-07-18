@@ -1,21 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Models\User;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::paginate(15);
+        $categories = Category::all();
 
-        return view('admin.user.index', compact('users'));
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
     /**
@@ -39,15 +39,16 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('admin.category.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        //
+        
+        return view('admin.category.edit');
     }
 
     /**

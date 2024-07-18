@@ -12,49 +12,26 @@
                     Nombre 
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Descripción
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Marca
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Categoría
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Cantidad
-                </th> 
-                <th scope="col" class="px-6 py-3">
-                    Precio
-                </th> 
+                    Email
+                </th>                
                 <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Edit</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach($products as $product)
+            @foreach($users as $user)
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $product->id }}
+                        {{ $user->id }}
                     </th>
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $product->name }}
+                        {{ $user->name }}
                     </th>
                     <td class="px-6 py-4">
-                        {{ $product->description }}
+                        {{ $user->email }}
                     </td>
-                    <td class="px-6 py-4">
-                        {{ $product->brand->name }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $product->category->name }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $product->quantity }}
-                    </td>
-                    <td class="px-6 py-4">
-                       $ {{ $product->price }}
-                    </td>
+                   
                     <td class="px-6 py-4 text-right">
                         <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                     </td>
@@ -63,8 +40,9 @@
         </tbody>
     </table>
 </div>
+
 <div class="mt-4">
-    {{ $products->links() }}
+    {{ $users->links() }}
 </div>
 
 </x-admin-layout>

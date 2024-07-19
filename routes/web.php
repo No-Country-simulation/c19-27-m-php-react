@@ -3,7 +3,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 
 /*
@@ -27,31 +30,32 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
-    Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard.dashboard');
+])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard.dashboard');
+    //Dashboard
+    //Crud de usuarios
+    Route::resource('/users', UserController::class)->names('admin.users');
+    //Crud Marcas
+    Route::resource('/brands', BrandController::class)->names('admin.brands');
+
+
+    //Crud Productos
+    Route::resource('/products', ProductController::class)->names('admin.products');
+    //Crud categorías
+    Route::resource('/categories', CategoryController::class)->names('admin.categories');
+            
+    
 });
 
 //Rutas publicas
 Route::get('/', [PublicController::class, 'index'])->name('website.index');
-Route::get('/products', [PublicController::class, 'products'])->name('website.products');
+Route::get('/productlist', [PublicController::class, 'products'])->name('website.products');
 
 
 
 
 
 
-//Productos
-Route::get('/products', [ProductController::class, 'index'])->name('admin.product.index');
-Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard.dashboard');
-
-
-//Rutas publicas
-Route::get('/', [PublicController::class, 'index'])->name('website.index');
-Route::get('/productslist', [PublicController::class, 'products'])->name('website.products');
-
-
-//Productos
-Route::get('/products', [ProductController::class, 'index'])->name('admin.product.index');
 
 
 

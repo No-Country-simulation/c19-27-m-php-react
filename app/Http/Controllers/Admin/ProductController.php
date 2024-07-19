@@ -13,7 +13,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(15);
+        $products = Product::with(['category', 'brand'])->paginate();
+         
+
         return view('admin.product.index', compact('products'));
         
     }
@@ -21,10 +23,12 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function create()
+    {   
+        
+
+        return view('admin.product.create');
+    }
 
     // /**
     //  * Store a newly created resource in storage.

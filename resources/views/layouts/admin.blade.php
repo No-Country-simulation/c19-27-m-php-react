@@ -21,11 +21,14 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+        {{-- sweet alert 2 --}}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Styles -->
         @livewireStyles
     </head>
     <body class="font-sans antialiased" 
+
+    @stack('css')
     {{-- :class="{ 'overflow-hidden': open }" --}}
     x-data="{open: false}">
     
@@ -50,9 +53,15 @@
 
  
         </div>
-
+        @stack('js')
         @stack('modals')
 
         @livewireScripts
+
+        @if(session('swal'))
+        <script>
+            Swal.fire({!! json_encode(session('swal')) !!});
+        </script>
+        @endif
     </body>
 </html>

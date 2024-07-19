@@ -40,7 +40,7 @@ Route::middleware([
 
 
     //Crud Productos
-    Route::get('/products', [ProductController::class, 'index'])->name('admin.product.index');
+    Route::resource('/products', ProductController::class)->names('admin.products');
     //Crud categorías
     Route::resource('/categories', CategoryController::class)->names('admin.categories');
             

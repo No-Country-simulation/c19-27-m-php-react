@@ -1,6 +1,6 @@
 <x-admin-layout>
     <!-- Formulario de actualización -->
-    <form action="{{ route('admin.categories.update', $category) }}" 
+    <form action="{{ route('admin.brands.update', $brand) }}" 
    method="POST"
    class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
    @csrf
@@ -15,25 +15,25 @@
        <x-input
        name="name" 
         class="block mt-1 w-full"
-        placeholder="Escriba el nombre de la categoría"
-        value="{{ $category->name }}"/>
+        placeholder="Escriba el nombre de la marca"
+        value="{{ $brand->name }}"/>
    </div>
 
    <div class="flex items-center justify-end mt-4">
          <!-- Botón de eliminar -->
-        <x-danger-button class="mr-2" onclick="deleteCategory()">
+        <x-danger-button class="mr-2" onclick="deleteBrand()">
             Eliminar
         </x-danger-button>
         
        <!-- Botón de actualizar -->
        <x-button>
-           Actualizar categoría
+           Actualizar marca
        </x-button>
    </div>
 
    </form>
    <!-- Formulario de eliminación -->
-   <form action="{{ route('admin.categories.destroy', $category) }}" 
+   <form action="{{ route('admin.brands.destroy', $brand) }}" 
         method="POST"
         id="formDelete">
         @csrf
@@ -44,8 +44,8 @@
    @push('js')
 
     <script>
-        function deleteCategory() {
-    console.log('Eliminando categoría');
+        function deleteBrand() {
+            console.log('Eliminando');
             form = document.getElementById('formDelete');
             form.submit();
         }

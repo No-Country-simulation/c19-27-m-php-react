@@ -8,8 +8,8 @@
       ],
       [
         'name' => 'Productos',
-         'url' => route('admin.product.index'),
-         'active' => request()->routeIs('admin.product.index'),
+         'url' => route('admin.products.index'),
+         'active' => request()->routeIs('admin.products.*'),
         'icon' => 'fa-brands fa-product-hunt',
       ],
       [

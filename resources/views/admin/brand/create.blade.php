@@ -1,6 +1,6 @@
 <x-admin-layout>
   
-   <form action="{{ route('admin.categories.store') }}" 
+   <form action="{{ route('admin.brands.store') }}" 
    method="POST"
    class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
    @csrf
@@ -14,13 +14,13 @@
        <x-input
        name="name" 
         class="block mt-1 w-full"
-        placeholder="Escriba el nombre de la categoría"/>
+        placeholder="Escriba el nombre de la marca"/>
    </div>
    
 
    <div class="flex items-center justify-end mt-4">
        <x-button>
-           Crear categoría
+           Crear marca
        </x-button>
    </div>
 

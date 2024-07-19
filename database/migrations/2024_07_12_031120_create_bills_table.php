@@ -13,19 +13,10 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-<<<<<<<< HEAD:database/migrations/2024_07_15_195033_create_bills_table.php
-
             $table->timestamp('date');
             $table->float('total');
             $table->boolean('state');
             $table->foreignId('user_iduser')->constrained('users')->onDelete('cascade');
-            
-========
-            $table->timestamp('date');
-            $table->float('total');
-            $table->boolean('state');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
->>>>>>>> origin/back_juan:database/migrations/2024_07_12_031120_create_bills_table.php
             $table->timestamps();
         });
     }

@@ -61,10 +61,8 @@
                                     <p class="text-gray-700">{{ $product->description }}</p>
                                     <div class="flex items-center justify-between">
                                         <p class="text-gray-700 font-semibold">${{ $product->price }}</p>
-                                        <button class="ml-auto text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-                                            <i class="fa-solid fa-cart-shopping w-6 h-6"></i>
-                                        </button>
                                     </div>
+                                    <button class="btn btn-success" style="border-radius: 6px; background: #007BFF; color:white;width: 157.355px;height: 31.857px; ">Agregar al carrito</button>
                                 </div>
                             </div>
                         @empty

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
@@ -17,18 +19,32 @@ class PublicController extends Controller
     }
 
     public function products(Request $request)
-    {
-        $searchTerm = $request->input('search');
-        
-        if ($searchTerm) {
-            $products = Product::where('name', 'ILIKE', "%{$searchTerm}%")
-                ->paginate(15);
-        } else {
-            $products = Product::paginate(15);
-        }
+{
+    $searchTerm = $request->input('search');
+    $selectedCategories = $request->input('category', []);
+    $selectedBrands = $request->input('brand', []);
+    $query = Product::query();
 
-        return view('website.products', compact('products'));
+    if ($searchTerm) {
+        $query->where('name', 'ILIKE', "%{$searchTerm}%");
     }
+
+    if (!empty($selectedCategories)) {
+        $query->whereIn('category_id', $selectedCategories);
+    }
+
+    if (!empty($selectedBrands)) {
+        $query->whereIn('brand_id', $selectedBrands);
+    }
+
+    $productCount = $query->count();
+    $products = $query->paginate(15);
+    $categories = Category::all();
+    $brands = Brand::all();
+
+    return view('website.products', compact('products', 'categories', 'brands', 'productCount'));
+}
+
 
 
     //product detail

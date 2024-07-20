@@ -3,7 +3,6 @@
     <div class="container mx-auto p-4">
         <form action="{{ route('website.products') }}" method="GET">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                <!-- Filtros -->
                 <div class="bg-white p-4 rounded-sm shadow-md">
                     <h2 class="text-lg font-bold mb-4" style="color: #C4C4C4;">Resultados ({{ $productCount }})</h2>
                     <br>

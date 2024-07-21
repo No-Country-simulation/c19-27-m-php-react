@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->string('address')->nullable();
-            $table->string('address_number')->nullable();
+            $table->string('street')->nullable();
             $table->string('house_number')->nullable();
             $table->string('postal_code')->nullable();
             $table->string('city')->nullable();

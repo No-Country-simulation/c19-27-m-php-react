@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'current_team_id' => null,
             'address' => $this->faker->name(),
             'phone_number' => $this->faker->phoneNumber(),
-            'address_number' => $this->faker->numberBetween(1, 5000),
+            'street' => $this->faker->numberBetween(1, 5000),
             'postal_code' => $this->faker->postcode(),
             'house_number' => $this->faker->numberBetween(1, 5000),
             'state' => $this->faker->state(),

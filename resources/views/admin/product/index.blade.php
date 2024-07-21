@@ -61,7 +61,8 @@
                        $ {{ $product->price }}
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                        <a href="{{ route('admin.products.show', $product) }}" class="font-medium text-green-600 dark:text-green-500 hover:underline ml-3">Ver</a>
                     </td>
                 </tr>
             @endforeach

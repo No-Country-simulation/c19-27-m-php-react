@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,8 @@ Route::middleware([
     Route::resource('/categories', CategoryController::class)->names('admin.categories');
     //CRUD roles
     Route::resource('/roles', RoleController::class)->names('admin.roles');
+    // Crud de permisos
+    Route::resource('/permissions', PermissionController::class)->names('admin.permissions');
 });
 
 // Rutas públicas

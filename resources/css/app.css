@@ -6,3 +6,40 @@
 [x-cloak] {
     display: none;
 }
+
+
+/* Estilos para el archivo navigation-menu.blade */
+.icon-hover {
+    color: #007BFF; /* Color inicial */
+    transition: color 0.5s ease;
+}
+
+.icon-hover:hover {
+    color: #e2e2e2; /* Color al pasar el cursor */
+}
+
+
+/* Estilos para el archivo index.blade */
+.texto-primera-imagen{
+    font-weight: 900; 
+    font-size: 50px; 
+    line-height: normal;
+}
+
+.cards-categorias{
+    background: #007BFF; 
+    border-radius:5px; 
+    font-weight:900; 
+    font-size:25px;
+}
+
+.contenedor-descuentos{
+    box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.porcentaje-descuentos{
+    color: #007BFF; 
+    font-size:90px;
+}
+
+

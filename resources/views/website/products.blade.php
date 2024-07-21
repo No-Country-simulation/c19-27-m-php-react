@@ -7,9 +7,7 @@
                     <h2 class="text-lg font-bold mb-4" style="color: #C4C4C4;">Resultados ({{ $productCount }})</h2>
                     <br>
                     <h2 class="text-lg mb-4">Envío gratis</h2>
-                    <h4 class="mb-4">En productos seleccionados
-                    por compras desde $149.990</h4>
-                   
+                    <h4 class="mb-4">En productos seleccionados por compras desde $149.990</h4>
                     <h5>Retiro en un punto</h5>
                     <br>
                     <div class="mb-4">
@@ -29,7 +27,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div x-data="{ open: false }">
                         <button @click="open = !open" type="button" class="w-full flex justify-between items-center text-gray-700 font-semibold py-2 border-b">
                             Marcas
@@ -48,8 +45,6 @@
 
                     <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Aplicar Filtros</button>
                 </div>
-
-
                 <div class="lg:col-span-3">
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         @forelse ($products as $product)
@@ -67,7 +62,7 @@
                         @empty
                             <div class="container text-center" style="margin-left: 10rem;">
                                 <div class="row">
-                                    <div class="col-6 col-md-4 mx-auto mt-40">
+                                    <div class="col-6 col-md-4 mx-auto mt-35">
                                         <div class="card" style="width: 18rem;">
                                             <i class="fas fa-times" style="color:red; font-size:7rem;"></i>
                                             <br>
@@ -78,7 +73,6 @@
                             </div>
                         @endforelse
                     </div>
-                    
                 </div>
             </div>
         </form>

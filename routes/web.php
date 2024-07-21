@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
@@ -41,6 +42,8 @@ Route::middleware([
     Route::resource('/products', ProductController::class)->names('admin.products');
     // Crud categorías
     Route::resource('/categories', CategoryController::class)->names('admin.categories');
+    //CRUD roles
+    Route::resource('/roles', RoleController::class)->names('admin.roles');
 });
 
 // Rutas públicas

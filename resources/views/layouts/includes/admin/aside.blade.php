@@ -32,8 +32,8 @@
       ],
       [
       'name' => 'Roles',
-      //   'url' => route('#'),
-      //   'active' => request()->routeIs('#'),
+        'url' => route('admin.roles.index'),
+        'active' => request()->routeIs('admin.roles.*'),
         'icon' => 'fa-solid fa-users-gear',
       ],
       [

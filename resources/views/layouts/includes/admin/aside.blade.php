@@ -40,7 +40,7 @@
       'name' => ' Permisos',
         'url' => route('admin.permissions.index'),
         'active' => request()->routeIs('admin.permissions.*'),
-        'icon' => 'fa-solid fa-user-lock',
+        'icon' => 'fa-solid fa-key',
       ],
 
      ]

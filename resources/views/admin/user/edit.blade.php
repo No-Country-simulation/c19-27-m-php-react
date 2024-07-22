@@ -10,6 +10,7 @@
         <!-- Campos del formulario de actualización -->
         <x-validation-errors class="mb-4"/>
      
+       
         <div class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
 
             <h1 class="text-xl text-gray-700 font-bold mb-4">Datos del usuario</h1>
@@ -20,16 +21,17 @@
             name="name" 
              class="block mt-1 w-full"
              placeholder="Ingrese el nombre"
-             value="{{ $user->name }}"/>
+             value="{{ old( 'name', $user->name) }}"/>
 
              <x-label class="mb-2 mt-2">
                 Email
                </x-label>
                <x-input
+               type="email"
                name="email" 
                 class="block mt-1 w-full"
                 placeholder="Ingrese el email"
-                value="{{ $user->email }}"/>
+                value="{{ old('email',$user->email) }}"/>
             
                 <x-label class="mb-2 mt-2">
                     Número de celular
@@ -38,8 +40,28 @@
                    name="phone_number" 
                     class="block mt-1 w-full"
                     placeholder="Ingrese el número de celular"
-                    value="{{ $user->phone_number }}"/>
+                    value="{{ old('phone_number',$user->phone_number) }}"/>
         </div>
+        <div class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+            <h1 class="text-xl text-gray-700 font-bold mb-4">Roles</h1>
+            <ul>
+                @foreach ($roles as $role)
+                    <li>
+                        <label>
+                            <x-checkbox
+                             name="roles[]" 
+                             value="{{ $role->id }}"
+                             :checked="in_array($role->id, old('roles', $user->roles->pluck('id')->toArray()))"
+                            />                           
+                            {{ $role->name }} 
+                        </label>
+                    </li>
+                @endforeach
+            </ul>
+           
+        </div>
+
         <div class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <h1 class="text-xl text-gray-700 font-bold mb-4">Dirección del usuario</h1>
 
@@ -50,7 +72,7 @@
                name="address" 
                 class="block mt-1 w-full"
                 placeholder="Ingrese la dirección"
-                value="{{ $user->address }}"/>
+                value="{{ old('address', $user->address) }}"/>
 
                 <x-label class="mb-2 mt-2">
                     Calle
@@ -59,7 +81,7 @@
                    name="street" 
                     class="block mt-1 w-full"
                     placeholder="Ingrese la dirección"
-                    value="{{ $user->street }}"/>
+                    value="{{ old('street', $user->street) }}"/>
 
                     <x-label class="mb-2 mt-2">
                         Número de casa o depto
@@ -68,7 +90,7 @@
                        name="house_number" 
                         class="block mt-1 w-full"
                         placeholder="Ingrese el n° de casa o depto"
-                        value="{{ $user->house_number }}"/>
+                        value="{{ old('house_number', $user->house_number) }}"/>
 
                     <x-label class="mb-2 mt-2">
                         Códigi postal
@@ -77,7 +99,7 @@
                        name="postal_code" 
                         class="block mt-1 w-full"
                         placeholder="Ingrese el código postal"
-                        value="{{ $user->postal_code }}"/>
+                        value="{{ old('postal_code', $user->postal_code) }}"/>
 
                         <x-label class="mb-2 mt-2">
                             Ciudad
@@ -86,7 +108,7 @@
                            name="city" 
                             class="block mt-1 w-full"
                             placeholder="Ingrese la ciudad"
-                            value="{{ $user->city }}"/>
+                            value="{{ old('city', $user->city) }}"/>
                     
                             <x-label class="mb-2 mt-2">
                                 Provincia
@@ -95,7 +117,7 @@
                                name="state" 
                                 class="block mt-1 w-full"
                                 placeholder="Ingrese la provincia"
-                                value="{{ $user->state }}"/>        
+                                value="{{ old('state', $user->state) }}"/>        
         </div>
      
         <div class="flex items-center justify-end mt-4">

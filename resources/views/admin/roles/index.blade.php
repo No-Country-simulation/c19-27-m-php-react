@@ -31,8 +31,9 @@
                     <td class="px-6 py-4">
                         {{ $role->name }}
                     </td>
-                    <td class="px-6 py-4 text-center">
+                    <td class=" flex justify-end mr-20">
                         <a href="{{ route('admin.roles.edit', $role) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                        <a href="{{ route('admin.roles.show', $role) }}" class="font-medium text-green-600 dark:text-green-500 hover:underline ml-3">Ver</a>
                     </td>
                 </tr>
             @endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -22,8 +23,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.roles.create');
+        $permissions = Permission::all();
+
+        return view('admin.roles.create', compact('permissions'));
     }
 
     /**
@@ -33,11 +35,14 @@ class RoleController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:roles,name',
+            'permissions' => 'nullable|array'
         ], [
             'name.required' => 'El nombre del rol es obligatorio.',
             'name.unique' => 'El nombre del rol ya está en uso.',
         ]);
         $role = Role::create($request->all());
+
+        $role->permissions()->attach($request->permissions);
 
         session()->flash('swal', [
             'position' => "center",
@@ -54,8 +59,9 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
-        return view('admin.roles.show', compact('role'));
+        // Obtener los permisos asociados al rol
+        $permissions = $role->permissions;
+        return view('admin.roles.show', compact('role', 'permissions'));
     }
 
     /**
@@ -63,8 +69,11 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
-        return view('admin.roles.edit', compact('role'));
+       
+        //Recuperacion de permisos
+        $permissions = Permission::all();
+        
+        return view('admin.roles.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -75,8 +84,12 @@ class RoleController extends Controller
         //
         $request->validate([
             'name' => 'required|unique:roles,name,' . $role->id,
+            'permissions' => 'nullable|array',
         ]);
         $role->update($request->all());
+
+        $role->permissions()->sync($request->permissions);
+        
         session()->flash('swal', [
             'position' => "center",
             'icon' => "success",

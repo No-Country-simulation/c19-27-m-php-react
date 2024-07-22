@@ -17,6 +17,23 @@
          placeholder="Escriba el nombre del rol"
          value="{{ old('name') }}" />
     </div>
+    <div class="mb-4">
+        <ul>
+            @foreach ($permissions as $permission)
+                <li>
+                    <label>
+                        <x-checkbox
+                            type="checkbox"
+                            name="permissions[]"
+                            value="{{ $permission->id }}"
+                            :checked="in_array($permission->id, old('permissions', [] ))">
+                        </x-checkbox>
+                        {{ $permission->name }}
+                    </label>
+                </li>
+            @endforeach
+        </ul>
+   </div>
     
  
     <div class="flex items-center justify-end mt-4">

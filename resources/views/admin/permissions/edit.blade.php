@@ -16,12 +16,12 @@
        name="name" 
         class="block mt-1 w-full"
         placeholder="Escriba el nombre del permiso"
-        value="{{ $permission->name }}"/>
+        value="{{ old('name', $permission->name) }}"/>
    </div>
 
-   <div class="flex items-center justify-end mt-4">
+   <div class="flex mt-4">
          <!-- Botón de eliminar -->
-        <x-danger-button class="mr-2" onclick="deletePermission()">
+        <x-danger-button class="ml-0 mr-2" onclick="deletePermission()">
             Eliminar
         </x-danger-button>
         

@@ -16,12 +16,29 @@
        name="name" 
         class="block mt-1 w-full"
         placeholder="Escriba el nombre del rol"
-        value="{{ $role->name }}"/>
+        value="{{old('name', $role->name)}}"/>
+   </div>
+   <div class="mb-4">
+        <ul>
+            @foreach ($permissions as $permission)
+                <li>
+                    <label>
+                        <x-checkbox
+                            type="checkbox"
+                            name="permissions[]"
+                            value="{{ $permission->id }}"
+                            :checked="in_array($permission->id, old('permissions', $role->permissions->pluck('id')->toArray()))">
+                        </x-checkbox>
+                        {{ $permission->name }}
+                    </label>
+                </li>
+            @endforeach
+        </ul>
    </div>
 
-   <div class="flex items-center justify-end mt-4">
+   <div class="flex mt-4">
          <!-- Botón de eliminar -->
-        <x-danger-button class="mr-2" onclick="deleteRole()">
+        <x-danger-button class="ml-0 mr-2" onclick="deleteRole()">
             Eliminar
         </x-danger-button>
         

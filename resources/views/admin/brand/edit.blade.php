@@ -19,9 +19,9 @@
         value="{{ $brand->name }}"/>
    </div>
 
-   <div class="flex items-center justify-end mt-4">
+   <div class="flex mt-4">
          <!-- Botón de eliminar -->
-        <x-danger-button class="mr-2" onclick="deleteBrand()">
+        <x-danger-button class="ml-0 mr-2" onclick="deleteBrand()">
             Eliminar
         </x-danger-button>
         

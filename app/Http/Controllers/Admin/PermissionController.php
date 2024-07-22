@@ -44,7 +44,7 @@ class PermissionController extends Controller
         session()->flash('swal', [
             'position' => "center",
             'icon' => "success",
-            'title' => "El rol se creó correctamente",
+            'title' => "El permiso se creó correctamente",
             'showConfirmButton' => false,
             'timer' => 1500
         ]);

@@ -1,6 +1,6 @@
 <x-admin-layout>
     <!-- Formulario de actualización -->
-    <form action="{{ route('admin.brands.update', $brand) }}" 
+    <form action="{{ route('admin.permissions.update', $permission) }}" 
    method="POST"
    class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
    @csrf
@@ -15,25 +15,25 @@
        <x-input
        name="name" 
         class="block mt-1 w-full"
-        placeholder="Escriba el nombre de la marca"
-        value="{{ $brand->name }}"/>
+        placeholder="Escriba el nombre del permiso"
+        value="{{ old('name', $permission->name) }}"/>
    </div>
 
    <div class="flex mt-4">
          <!-- Botón de eliminar -->
-        <x-danger-button class="ml-0 mr-2" onclick="deleteBrand()">
+        <x-danger-button class="ml-0 mr-2" onclick="deletePermission()">
             Eliminar
         </x-danger-button>
         
        <!-- Botón de actualizar -->
        <x-button>
-           Actualizar marca
+           Actualizar
        </x-button>
    </div>
 
    </form>
    <!-- Formulario de eliminación -->
-   <form action="{{ route('admin.brands.destroy', $brand) }}" 
+   <form action="{{ route('admin.permissions.destroy', $permission) }}" 
         method="POST"
         id="formDelete">
         @csrf
@@ -44,8 +44,8 @@
    @push('js')
 
     <script>
-        function deleteBrand() {
-            console.log('Eliminando');
+        function deletePermission() {
+           
             form = document.getElementById('formDelete');
             form.submit();
         }

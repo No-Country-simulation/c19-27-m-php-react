@@ -19,9 +19,9 @@
         value="{{ $category->name }}"/>
    </div>
 
-   <div class="flex items-center justify-end mt-4">
+   <div class="flex mt-4">
          <!-- Botón de eliminar -->
-        <x-danger-button class="mr-2" onclick="deleteCategory()">
+        <x-danger-button class="ml-0 mr-2" onclick="deleteCategory()">
             Eliminar
         </x-danger-button>
         

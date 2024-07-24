@@ -32,15 +32,15 @@
       ],
       [
       'name' => 'Roles',
-      //   'url' => route('#'),
-      //   'active' => request()->routeIs('#'),
-        'icon' => 'fa-solid fa-users-gear',
+        'url' => route('admin.roles.index'),
+        'active' => request()->routeIs('admin.roles.*'),
+        'icon' => 'fa-solid fa-user-tag',
       ],
       [
       'name' => ' Permisos',
-      //   'url' => route('#'),
-      //   'active' => request()->routeIs('#'),
-        'icon' => 'fa-solid fa-user-lock',
+        'url' => route('admin.permissions.index'),
+        'active' => request()->routeIs('admin.permissions.*'),
+        'icon' => 'fa-solid fa-key',
       ],
 
      ]

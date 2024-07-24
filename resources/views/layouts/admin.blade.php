@@ -58,7 +58,7 @@
 
         @livewireScripts
 
-        @if(session('swal'))
+        @if(session('swal'))a
         <script>
             Swal.fire({!! json_encode(session('swal')) !!});
         </script>

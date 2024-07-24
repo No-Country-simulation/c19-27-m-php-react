@@ -31,6 +31,16 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_photo_path',
+        'address',
+        'phone_number',
+        'street',
+        'city',
+        'state',
+        'postal_code',
+        'house_number',
+        
+
     ];
 
     /**
@@ -63,11 +73,5 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function carts():HasMany{
-        return $this->hasMany(Cart::class);
-    }
-
-    public function bills():HasMany{
-        return $this->hasMany(Bill::class);
-    }
+    
 }

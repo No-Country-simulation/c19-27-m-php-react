@@ -22,6 +22,10 @@ class DatabaseSeeder extends Seeder
         //     'name' => fake()->name(),
         //     'email' => fake()->email()->unique(),
         // ]);
+         // Llama al UserSeeder
+         $this->call(UserSeeder::class);
+
+    // Llama a las factories     
     User::factory(30)->create();    
     Category::factory(20)->create();
     Brand::factory(20)->create();

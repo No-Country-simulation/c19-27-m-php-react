@@ -21,12 +21,14 @@
 
             <!-- Search Input -->
             <div class="relative w-7/12">
-                <input type="search" id="search-dropdown" class="p-1.5 w-full z-10 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Buscar productos..." required />
-                <button type="submit" class="absolute top-0 end-0 p-1.5 text-sm font-medium h-full text-white rounded-e-lg border bg-green-400 border-green-400 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                    </svg>
-                </button>
+                <form action="{{ route('website.products') }}" method="GET">
+                    <input type="search" id="search-dropdown" class="p-1.5 w-full z-10 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Buscar productos..." name="search" />
+                    <button type="submit" class="absolute top-0 end-0 p-1.5 text-sm font-medium h-full text-white rounded-e-lg border bg-green-400 border-green-400 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 boton busqueda">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>
+                    </button>
+                </form>
             </div>
 
             <!-- Authentication Links / User Dropdown / Shopping Cart -->
@@ -34,7 +36,7 @@
                 <!-- Shopping Cart -->
                 <div class="relative">
                     <a href="#" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-                        <i class="fa-solid fa-cart-shopping w-6 h-6"></i>
+                        <i class="fa-solid fa-cart-shopping w-6 h-6 icon-hover"></i>
 
                     </a>
                 </div>

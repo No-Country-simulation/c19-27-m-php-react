@@ -11,21 +11,14 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'price',
-        'categories_idcategories',
-        'brand_id',
-    ];
+    protected $guarded=[];
 
-    public function category():BelongsTo
-    {
-        return $this->belongsTo(Category::class);
+    public function brand():BelongsTo{
+        return $this->belongsTo(Brand::class);
     }
 
-    public function brand():BelongsTo
-    {
-        return $this->belongsTo(Brand::class);
+    public function category():BelongsTo{
+        return $this->belongsTo(Category::class);
     }
 
     public function carts():BelongsToMany{

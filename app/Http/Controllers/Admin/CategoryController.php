@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('id', 'desc')->paginate();
+        $categories = Category::all();
 
         return view('admin.category.index', compact('categories'));
     }
@@ -32,28 +31,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|unique:categories|string|max:255',
-        ]);
-
-        Category::create($request->all());
-        session()->flash('swal', [
-            'position' => "center",
-            'icon' => "success",
-            'title' => "La categoría se creó correctamente",
-            'showConfirmButton' => false,
-            'timer' => 1500
-        ]);
-
-        return redirect()->route('admin.categories.index');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(string $id)
     {
-        return view('admin.category.show' , compact('category'));
+        return view('admin.category.show');
     }
 
     /**
@@ -62,59 +48,22 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         
-        return view('admin.category.edit', compact('category'));
+        return view('admin.category.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, string $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        $category->update($request->all());
-
-        session()->flash('swal', [
-            'position' => "center",
-            'icon' => "success",
-            'title' => "La categoría se actualizó correctamente",
-            'showConfirmButton' => false,
-            'timer' => 1500
-        ]);
-
-        return redirect()->route('admin.categories.index', $category);   
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(string $id)
     {
-        $products = Product::where('category_id', $category->id)->exists();
-        if($products){
-            session()->flash('swal', [
-                'position' => "center",
-                'icon' => "error",
-                'title' => "La categoría no se puede eliminar porque tiene productos asociados",
-                'showConfirmButton' => false,
-                'timer' => 1500
-            ]);
-            return redirect()->route('admin.categories.index', $category);
-        }
-        
-
-        $category->delete();
-
-        session()->flash('swal', [
-            'position' => "center",
-            'icon' => "success",
-            'title' => "La marca se eliminó correctamente",
-            'showConfirmButton' => false,
-            'timer' => 1500
-        ]);
-
-        return redirect()->route('admin.categories.index');
+        //
     }
 }

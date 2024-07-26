@@ -15,9 +15,8 @@
                     Email
                 </th>                
                 <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Editar</span>
+                    <span class="sr-only">Edit</span>
                 </th>
-               
             </tr>
         </thead>
         <tbody>
@@ -34,11 +33,8 @@
                     </td>
                    
                     <td class="px-6 py-4 text-right">
-                        <a href="{{ route('admin.users.edit', $user) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-                        
-                        <a href="{{ route('admin.users.show', $user) }}" class="font-medium text-green-600 dark:text-green-500 hover:underline ml-3">Ver</a>
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                     </td>
-                    
                 </tr>
             @endforeach
         </tbody>

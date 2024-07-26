@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
-use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
@@ -14,41 +12,14 @@ class PublicController extends Controller
      */
     public function index()
     {
-        /* $products = Product::paginate(15);
-        return view('website.index', compact('products')); */
-        $latestProducts = Product::orderBy('created_at', 'desc')->take(4)->get();
-        return view('website.index', compact('latestProducts'));
+        $products = Product::paginate(15);
+        return view('website.index', compact('products'));
     }
-
-    public function products(Request $request)
+    public function products()
     {
-        //se definen las variables que reciben los distintos filtros y se instancia la función query
-        $searchTerm = $request->input('search');
-        $selectedCategories = $request->input('category', []);
-        $selectedBrands = $request->input('brand', []);
-        $query = Product::query();
-
-        //Validaciones para verificar bajo que filtros se hará la consulta
-        if ($searchTerm) {
-            $query->where('name', 'ILIKE', "%{$searchTerm}%");
-        }
-
-        if (!empty($selectedCategories)) {
-            $query->whereIn('category_id', $selectedCategories);
-        }
-
-        if (!empty($selectedBrands)) {
-            $query->whereIn('brand_id', $selectedBrands);
-        }
-
-        $productCount = $query->count();
-        $products = $query->paginate(15);
-        $categories = Category::all();
-        $brands = Brand::all();
-
-        return view('website.products', compact('products', 'categories', 'brands', 'productCount'));
+        $products = Product::paginate(15);
+        return view('website.products', compact('products'));
     }
-
 
 
     //product detail

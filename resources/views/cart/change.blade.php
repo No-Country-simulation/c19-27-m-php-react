@@ -10,17 +10,20 @@
                     <p class="text-gray-700">{{ $product->description }}</p>
                     <div class="flex items-center justify-between">
                         <p class="text-gray-700 font-semibold">${{ $product->price }}</p>
-                        <button class="ml-auto text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-                            <i class="fa-solid fa-cart-shopping w-6 h-6"></i>
-                        </button>
+                        <form  action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-2">
+                            @csrf
+                            <button class="ml-auto text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                                <i class="fa-solid fa-cart-shopping w-6 h-6"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
     </div>
-    
-    
+
+
     <script src="{{ mix('js/app.js') }}"></script>
 
 

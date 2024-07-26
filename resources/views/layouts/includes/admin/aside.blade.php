@@ -8,8 +8,8 @@
       ],
       [
         'name' => 'Productos',
-         'url' => route('admin.products.index'),
-         'active' => request()->routeIs('admin.products.*'),
+         'url' => route('admin.product.index'),
+         'active' => request()->routeIs('admin.product.index'),
         'icon' => 'fa-brands fa-product-hunt',
       ],
       [
@@ -32,15 +32,15 @@
       ],
       [
       'name' => 'Roles',
-        'url' => route('admin.roles.index'),
-        'active' => request()->routeIs('admin.roles.*'),
-        'icon' => 'fa-solid fa-user-tag',
+      //   'url' => route('#'),
+      //   'active' => request()->routeIs('#'),
+        'icon' => 'fa-solid fa-users-gear',
       ],
       [
       'name' => ' Permisos',
-        'url' => route('admin.permissions.index'),
-        'active' => request()->routeIs('admin.permissions.*'),
-        'icon' => 'fa-solid fa-key',
+      //   'url' => route('#'),
+      //   'active' => request()->routeIs('#'),
+        'icon' => 'fa-solid fa-user-lock',
       ],
 
      ]

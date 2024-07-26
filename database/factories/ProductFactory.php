@@ -18,6 +18,15 @@ class ProductFactory extends Factory
     {
         return [
             //
+
+            'name' => fake()->name(),
+            'description' => fake()->sentence(),
+            'price' => fake()->numberBetween(100, 1000),
+            'quantity' => fake()->numberBetween(0, 100),
+            'category_id' => fake()->numberBetween(1,20),
+            'brand_id' => fake()->numberBetween(1,20),
+            'image' => $this->faker->imageUrl(640, 480, 'products', true),
+
         ];
     }
 }

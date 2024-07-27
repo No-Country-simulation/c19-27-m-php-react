@@ -71,6 +71,11 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    public function hasAnyRole()
+    {
+        // Ajusta los roles según tu configuración
+        return $this->hasAnyRole(['Administrador']);
+    }
 
     
 }

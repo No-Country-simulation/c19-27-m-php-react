@@ -1,50 +1,84 @@
 @php
-     $links = [
-      [
-        'name' => 'Dashboard',
-        'url' => route('admin.dashboard.dashboard'),
-        'active' => request()->routeIs('admin.dashboard.dashboard'),
-        'icon' => 'fa-solid fa-gauge-high',
-      ],
-      [
-        'name' => 'Productos',
-         'url' => route('admin.products.index'),
-         'active' => request()->routeIs('admin.products.*'),
-        'icon' => 'fa-brands fa-product-hunt',
-      ],
-      [
-      'name' => 'Categorías',
-        'url' => route('admin.categories.index'),
-        'active' => request()->routeIs('admin.categories.*'),
-        'icon' => 'fa-solid fa-list',
-      ],
-      [
-      'name' => 'Marcas',
-        'url' => route('admin.brands.index'),
-        'active' => request()->routeIs('admin.brands.*'),
-        'icon' => 'fa-solid fa-copyright',
-      ],
-      [
-      'name' => 'Usuarios',
-        'url' => route('admin.users.index'),
-        'active' => request()->routeIs('admin.users.*'),
-        'icon' => 'fa-solid fa-users',
-      ],
-      [
-      'name' => 'Roles',
-        'url' => route('admin.roles.index'),
-        'active' => request()->routeIs('admin.roles.*'),
-        'icon' => 'fa-solid fa-user-tag',
-      ],
-      [
-      'name' => ' Permisos',
-        'url' => route('admin.permissions.index'),
-        'active' => request()->routeIs('admin.permissions.*'),
-        'icon' => 'fa-solid fa-key',
-      ],
+    $links = [
+        // Admin
+        [
+            'name' => 'Dashboard',
+            'url' => route('admin.dashboard.dashboard'),
+            'active' => request()->routeIs('admin.dashboard.dashboard'),
+            'icon' => 'fa-solid fa-gauge-high',
+            'can' => ['dashboard-access']
+        ],
+        [
+            'name' => 'Productos',
+            'url' => route('admin.products.index'),
+            'active' => request()->routeIs('admin.products.*'),
+            'icon' => 'fa-brands fa-product-hunt',
+            'can' => ['product-access']
+        ],
+        [
+            'name' => 'Categorías',
+            'url' => route('admin.categories.index'),
+            'active' => request()->routeIs('admin.categories.*'),
+            'icon' => 'fa-solid fa-list',
+            'can' =>[ 'category-access']
+        ],
+        [
+            'name' => 'Marcas',
+            'url' => route('admin.brands.index'),
+            'active' => request()->routeIs('admin.brands.*'),
+            'icon' => 'fa-solid fa-copyright',
+            'can' => ['brand-access']
+        ],
+        [
+            'name' => 'Usuarios',
+            'url' => route('admin.users.index'),
+            'active' => request()->routeIs('admin.users.*'),
+            'icon' => 'fa-solid fa-users',
+            'can' => ['user-access']
+        ],
+        [
+            'name' => 'Roles',
+            'url' => route('admin.roles.index'),
+            'active' => request()->routeIs('admin.roles.*'),
+            'icon' => 'fa-solid fa-user-tag',
+            'can' => ['role-access']
+        ],
+        [
+            'name' => 'Permisos',
+            'url' => route('admin.permissions.index'),
+            'active' => request()->routeIs('admin.permissions.*'),
+            'icon' => 'fa-solid fa-key',
+            'can' => ['permission-access']
+        ],
+        // Clientes
+        [
+            'name' => 'Mi Cuenta',
+            // 'url' => route('admin.permissions.index'),
+            // 'active' => request()->routeIs('admin.permissions.*'),
+            'active' => false, // Estado activo predeterminado
+            'icon' => 'fa-solid fa-user',
+            'can' => ['permission-access']
+        ],
+        [
+            'name' => 'Mis Compras',
+            // 'url' => route('admin.permissions.index'),
+            // 'active' => request()->routeIs('admin.permissions.*'),
+            'active' => false, // Estado activo predeterminado
+            'icon' => 'fa-solid fa-basket-shopping',
+            'can' => ['permission-access']
+        ],
+        [
+            'name' => 'Favoritos',
+            // 'url' => route('admin.permissions.index'),
+            // 'active' => request()->routeIs('admin.permissions.*'),
+            'active' => false, // Estado activo predeterminado
+            'icon' => 'fa-solid fa-heart',
+            'can' => ['permission-access']
+        ],
 
-     ]
+    ];
 @endphp
+
 
 <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar"
 :class="{
@@ -56,7 +90,8 @@
          
           @foreach ($links as $link)
           <li>
-            <a href="{{ $link['url'] ?? '#'}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ">
+            @canany($link['can'] ?? [null])
+            <a href="{{ $link['url'] ?? '#'}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ $link['active'] ? 'bg-gray-100 dark:bg-gray-700' : ''}}">
               
                 <i class="{{ $link['icon'] }} text-green-400"></i>
               
@@ -64,6 +99,7 @@
                   {{ $link['name'] }}
                </span>
             </a>
+            @endcanany
          </li>
           @endforeach
           

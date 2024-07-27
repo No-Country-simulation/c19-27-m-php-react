@@ -39,5 +39,8 @@
         </tbody>
     </table>
 </div>
+<div class="mt-4">
+    {{ $permissions->links() }}
+</div>
 
 </x-admin-layout>

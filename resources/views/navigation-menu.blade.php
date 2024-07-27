@@ -65,8 +65,14 @@
                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                     {{ __('Manage Account') }}
                                 </div>
+                                @if (Auth::user()->can('dashboard-access'))
+                                    <x-dropdown-link href="{{ route('admin.dashboard.dashboard') }}">
+                                        Administrador
+                                    </x-dropdown-link>
+                                @endif
+                                {{-- Crear y Agregar ruta client.profile.show --}}
                                 <x-dropdown-link href="{{ route('profile.show') }}">
-                                    {{ __('Profile') }}
+                                    Perfil
                                 </x-dropdown-link>
                                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                     <x-dropdown-link href="{{ route('api-tokens.index') }}">

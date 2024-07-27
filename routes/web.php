@@ -22,8 +22,20 @@ use App\Http\Controllers\Admin\PermissionController;
 |
 */
 
+// Rutas de Jetstream
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
+    // Route::get('admin/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
+
+    Route::get('/user/profile', function () {
+        return view('profile.show');
+    })->name('profile.show');
+});
+
 // Rutas públicas
 Route::get('/', [PublicController::class, 'index'])->name('website.index');
+Route::get('/home', [PublicController::class, 'index'])->name('website.index');
 Route::get('/productlist', [PublicController::class, 'products'])->name('website.products');
 
 
@@ -35,13 +47,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Dashboard
     Route::group(['prefix' => 'dashboard'], function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard.dashboard');    
+        Route::get('/', [DashboardController::class, 'index'])->middleware(['can:dashboard-access'])->name('dashboard.dashboard');    
     });
 
 
-    // CRUR PRODUCT
+    // CRUR PRODUCTOS
     Route::group(['prefix' => 'products'], function () {
-        Route::get('/', [ProductController::class, 'index'])->name('products.index');
+        Route::get('/', [ProductController::class, 'index'])->middleware(['can:product-access'])->name('products.index');
         Route::get('/create', [ProductController::class, 'create'])->name('products.create');
         Route::post('/', [ProductController::class, 'store'])->name('products.store');
         Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
@@ -50,9 +62,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
         Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     });
 
-    // CRUD  CATEGORIA
+    // CRUD  CATEGORIAS
     Route::group(['prefix' => 'categories'], function () {
-        Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+        Route::get('/', [CategoryController::class, 'index'])->middleware(['can:category-access'])->name('categories.index');
         Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
         Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
         Route::get('/{category}', [CategoryController::class, 'show'])->name('categories.show');
@@ -62,7 +74,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     });
     // CRUD ROLES
     Route::group(['prefix' => 'roles'], function () {
-        Route::get('/', [RoleController::class, 'index'])->name('roles.index');
+        Route::get('/', [RoleController::class, 'index'])->middleware(['can:role-access'])->name('roles.index');
         Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
         Route::post('/', [RoleController::class, 'store'])->name('roles.store');
         Route::get('/{role}', [RoleController::class, 'show'])->name('roles.show');
@@ -73,7 +85,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // CRUD PERMISOS
     Route::group(['prefix' => 'permissions'], function () {
-        Route::get('/', [PermissionController::class, 'index'])->name('permissions.index');
+        Route::get('/', [PermissionController::class, 'index'])->middleware(['can:permission-access'])->name('permissions.index');
         Route::get('/create', [PermissionController::class, 'create'])->name('permissions.create');
         Route::post('/', [PermissionController::class, 'store'])->name('permissions.store');
         Route::get('/{permission}', [PermissionController::class, 'show'])->name('permissions.show');
@@ -85,23 +97,21 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // CRUD USUARIOS
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', [UserController::class, 'index'])->name('users.index')->middleware(['can:user-access']);
-        Route::get('/create', [UserController::class, 'create'])->name('users.create');
-        Route::post('/', [UserController::class, 'store'])->name('users.store');
-        Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
-        Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::get('/{user}', [UserController::class, 'show'])->middleware(['can:user-show'])->name('users.show');
+        Route::get('/{user}/edit', [UserController::class, 'edit'])->middleware(['can:user-edit'])->name('users.edit');
         Route::put('/{user}', [UserController::class, 'update'])->name('users.update');
-        Route::delete('/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+        Route::delete('/{user}', [UserController::class, 'destroy'])->middleware(['can:user-delete'])->name('users.destroy');
     });
 
     // CRUD MARCAS
     Route::group(['prefix' => 'brands'], function () {
-        Route::get('/', [BrandController::class, 'index'])->name('brands.index');
-        Route::get('/create', [BrandController::class, 'create'])->name('brands.create');
+        Route::get('/', [BrandController::class, 'index'])->middleware(['can:brand-access'])->name('brands.index');
+        Route::get('/create', [BrandController::class, 'create'])->middleware(['can:brand-create'])->name('brands.create');
         Route::post('/', [BrandController::class, 'store'])->name('brands.store');
         Route::get('/{brand}', [BrandController::class, 'show'])->name('brands.show');
-        Route::get('/{brand}/edit', [BrandController::class, 'edit'])->name('brands.edit');
+        Route::get('/{brand}/edit', [BrandController::class, 'edit'])->middleware(['can:brand-edit'])->name('brands.edit');
         Route::put('/{brand}', [BrandController::class, 'update'])->name('brands.update');
-        Route::delete('/{brand}', [BrandController::class, 'destroy'])->name('brands.destroy');
+        Route::delete('/{brand}', [BrandController::class, 'destroy'])->middleware(['can:brand-delete'])->name('brands.destroy');
     });
 });
 

@@ -18,6 +18,7 @@
          value="{{ old('name') }}" />
     </div>
     <div class="mb-4">
+        <x-label class="mb-2">Permisos</x-label>
         <ul>
             @foreach ($permissions as $permission)
                 <li>
@@ -35,12 +36,13 @@
         </ul>
    </div>
     
+    
  
     <div class="flex items-center justify-end mt-4">
         <x-button>
             Crear rol
         </x-button>
     </div>
- 
-    </form>
+  </form>
+    
  </x-admin-layout>

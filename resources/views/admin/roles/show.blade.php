@@ -14,7 +14,7 @@
                       </div>
                 </div>
             @else
-                <h2 class="text-lg text-gray-700 font-bold mb-2">Permisos:</h2>
+                <h2 class="text-lg text-gray-700 font-bold mb-2">Permisos asignados:</h2>
                 <ul class="list-disc list-inside">
                     @foreach ($permissions as $permission)
                         <li class="text-gray-600">{{ $permission->name }}</li>

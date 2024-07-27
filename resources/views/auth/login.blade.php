@@ -40,7 +40,7 @@
                 </label>
             </div>
 
-            <div class= items-center justify-center mt-4">
+            <div class= "items-center justify-center mt-4">
                
                 <div class="flex justify-center mb-4">
                     <x-button class="ms-4 text-white bg-blue-500 hover:bg-blue-700	">

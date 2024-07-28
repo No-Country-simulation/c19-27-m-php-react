@@ -31,7 +31,7 @@
         @stack('css')
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-white">
             @livewire('navigation-menu')
 
               <!-- Include Gray Bar Component -->
@@ -47,7 +47,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="">
                 {{ $slot }}
             </main>
         </div>

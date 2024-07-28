@@ -1,4 +1,15 @@
 
+# DEV LM 2024.07.30 - SE RENOMBRO LA COLUMNA USER_USERID EN TABLA CARTS Y EN TABLA BILLS
+SHOW CREATE TABLE carts;
+ALTER TABLE carts DROP FOREIGN KEY carts_user_iduser_foreign;
+ALTER TABLE carts CHANGE COLUMN user_iduser user_id INT;
+
+SHOW CREATE TABLE bills;
+ALTER TABLE bills DROP FOREIGN KEY bills_user_iduser_foreign;
+ALTER TABLE bills CHANGE COLUMN user_iduser user_id INT;
+
+
+
 # DEVLM 2024.7 - SE RENOMBRO CATEGORY_ID EN LA TABLA PRODUCTO 
 ALTER TABLE products DROP FOREIGN KEY products_categories_idcategories_foreign;
 ALTER TABLE products CHANGE categories_idcategories category_id BIGINT UNSIGNED;

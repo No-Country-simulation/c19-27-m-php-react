@@ -4,6 +4,7 @@
             <a href="#" class="hover:text-gray-900">Ingresa tu ubicación</a>
         </div>
         <div class="flex space-x-4">
+            <a href="{{ route('website.products') }}" class="text-sm text-gray-700 hover:text-gray-900">Todos los productos</a>
             <a href="#" class="text-sm text-gray-700 hover:text-gray-900">Categorías</a>
             <a href="#" class="text-sm text-gray-700 hover:text-gray-900">Ofertas</a>
             <a href="#" class="text-sm text-gray-700 hover:text-gray-900">Ayuda PQR</a>

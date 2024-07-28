@@ -35,7 +35,7 @@
             <div class="flex items-center space-x-4">
                 <!-- Shopping Cart -->
                 <div class="relative">
-                    <a href="#" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                    <a href="{{ route('cart.show.cart') }}" class="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                         <i class="fa-solid fa-cart-shopping w-6 h-6 icon-hover"></i>
 
                     </a>

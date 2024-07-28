@@ -1,8 +1,9 @@
 <x-app-layout>
 
     <div class="container mx-auto p-4">
-        <form action="{{ route('website.products') }}" method="GET">
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+
+            <form action="{{ route('website.products') }}" method="GET">
                 <div class="bg-white p-4 rounded-sm shadow-md">
                     <h2 class="text-lg font-bold mb-4" style="color: #C4C4C4;">Resultados ({{ $productCount }})</h2>
                     <br>
@@ -42,11 +43,13 @@
                             @endforeach
                         </div>
                     </div>
-
                     <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Aplicar Filtros</button>
                 </div>
+            </form>
+            
                 <div class="lg:col-span-3">
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
                         @forelse ($products as $product)
                             <div class="bg-white rounded-sm shadow-md overflow-hidden">
                                 <img src="{{ $product->image }}" alt="Imagen" class="w-full h-48 object-cover">
@@ -56,7 +59,7 @@
                                     <div class="flex items-center justify-between">
                                         <p class="text-gray-700 font-semibold">${{ $product->price }}</p>
                                     </div>
-                                    <button class="btn btn-success" style="border-radius: 6px; background: #007BFF; color:white;width: 157.355px;height: 31.857px; ">Agregar al carrito</button>
+                                    <button class="btn btn-success" onclick="addToCart({{ $product->id }})" style="border-radius: 6px; background: #007BFF; color:white; width: 157.355px; height: 31.857px;">Agregar al carrito</button>
                                 </div>
                             </div>
                         @empty
@@ -67,20 +70,45 @@
                                             <i class="fas fa-times" style="color:red; font-size:7rem;"></i>
                                             <br>
                                             <h1 style="font-size:3.5rem;">No se encontraron productos</h1>
-                                        </div>                         
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         @endforelse
+
+
                     </div>
                 </div>
             </div>
-        </form>
+        
     </div>
+
+    <form id="cart-form" method="POST" style="display: none;">
+        @csrf
+        <input type="hidden" name="product_id" id="product_id">
+    </form>
+    
+    
 
     <div class="mb-4">
         {{ $products->links() }}
     </div> 
 
     <script src="{{ mix('js/app.js') }}"></script>
+
+    <script>
+        function addToCart(productId) {
+            // Actualiza el campo oculto del formulario con el ID del producto
+            document.getElementById('product_id').value = productId;
+    
+            // Actualiza la acción del formulario con el ID del producto
+            var form = document.getElementById('cart-form');
+            var actionUrl = "{{ url('cart/add') }}/" + productId;
+            form.action = actionUrl;
+    
+            // Envía el formulario
+            form.submit();
+        }
+    </script>
+    
 </x-app-layout>

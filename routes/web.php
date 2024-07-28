@@ -117,7 +117,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     });
 });
 
-Route::group([ 'namespace' => 'Client', 'middleware' => ['auth']], function () {
+Route::group([ 'middleware' => ['auth']], function () {
 
 
 //Carrito de compras

@@ -128,7 +128,6 @@ class CartController extends Controller
     }
 
     public function add($productId){
-
         $sesion= Auth::user();
        $aux = $sesion->id;
        $user = User::find($aux);

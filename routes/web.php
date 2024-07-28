@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\CartController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -115,6 +117,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     });
 });
 
+Route::group([ 'namespace' => 'Client', 'middleware' => ['auth']], function () {
+
+
+//Carrito de compras
+Route::get('/cart', [CartController::class, 'index'])->name('cart.show.cart');
+Route::post('/cart/updateOrRemove/{productId}', [CartController::class, 'updateQuantity'])->name('cart.uOr');
+Route::get('/cart/change', [CartController::class, 'finished'])->name('cart.finished');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/user/productlist', [CartController::class, 'list'])->name('user.list');
+
+});
 
 
 

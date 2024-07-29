@@ -2,8 +2,11 @@
     <div class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="col-span-2">
+                <div class="flex items-center mb-2">
+                    <h2 class="text-xl font-semibold">Carrito:</h2>
+                    <span class="text-gray-700 ml-2">(<span class="total-quantity">{{ $products->sum('pivot.quantity') }}</span>)</span>
+                </div>
                 @if(isset($products) && $products->isNotEmpty())
-                    <h2 class="text-xl font-semibold mb-2">Productos en tu carrito</h2>
                     <ul class="bg-white shadow rounded-lg p-4">
                         @foreach($products as $product)
                             <li class="border-b border-gray-200 py-4">
@@ -39,11 +42,11 @@
                 @endif
             </div>
             <div class="col-span-1">
-                <h2 class="text-xl font-semibold mb-2">Productos en tu carrito</h2>
+                <h2 class="text-xl font-semibold mb-2">Resumen de la orden</h2>
                 <div class="bg-white p-4 rounded-lg shadow-md top-4">
                     <div class="border-b pb-2 mb-2">
                         <div class="flex justify-between">
-                            <span class="text-gray-700">Productos ({{ $products->count() }})</span>
+                            <span class="text-gray-700">Productos (<span class="total-quantity">{{ $products->sum('pivot.quantity') }}</span>)</span>
                             <span class="text-gray-700 total-price">${{ number_format($total, 2) }}</span>
                         </div>
                     </div>
@@ -54,7 +57,6 @@
                         </div>
                     </div>
                     <a href="{{ route('website.products') }}" class="bg-blue-500 text-white font-bold py-2 rounded w-full mt-4 text-center block">Seguir comprando</a>
-
                     <button class="bg-blue-500 text-white font-bold py-2 rounded w-full mt-2">Continuar compra</button>
                 </div>
             </div>
@@ -65,14 +67,17 @@
         $(document).ready(function() {
             function updateTotalPrice() {
                 let total = 0;
+                let totalQuantity = 0;
                 $('.quantity-input').each(function() {
                     const quantity = parseInt($(this).val());
                     const price = parseFloat($(this).closest('li').find('.price').data('price'));
                     if (!isNaN(quantity) && !isNaN(price)) {
                         total += quantity * price;
+                        totalQuantity += quantity;
                     }
                 });
                 $('.total-price').text('$' + total.toFixed(2));
+                $('.total-quantity').text(totalQuantity + ' productos');
             }
 
             $('.increment-btn').click(function() {
@@ -95,14 +100,10 @@
                 }
             });
 
-            // Deshabilitar el borde del input
-            $('.quantity-input').css('border', 'none');
-
             // Inicializar el precio total en la carga de la página
             updateTotalPrice();
         });
     </script>
-
-   
 </x-app-layout>
+
 

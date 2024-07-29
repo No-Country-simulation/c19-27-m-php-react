@@ -23,9 +23,25 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
          {{-- sweet alert 2 --}}
          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <!-- Styles -->
         @livewireStyles
+
+
+        <style>
+            /* Webkit browsers (Chrome, Safari) */
+            .quantity-input::-webkit-outer-spin-button,
+            .quantity-input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            /* Firefox */
+            .quantity-input[type="number"] {
+                -moz-appearance: textfield;
+            }
+        </style>
     </head>
     <body class="font-sans antialiased">
         @stack('css')
@@ -59,6 +75,8 @@
         @stack('modals')
         @stack('js')
         @livewireScripts
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         @if(session('swal'))
         <script>

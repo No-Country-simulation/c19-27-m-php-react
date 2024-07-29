@@ -129,26 +129,34 @@ class CartController extends Controller
 
     public function add($productId){
         $sesion= Auth::user();
-       $aux = $sesion->id;
-       $user = User::find($aux);
-
-       $cart = $user->carts()->where('state', 1)->first();
-
-       if(!$cart){
-        $cart=$this->create($user);
-       }
-
-       $cartProduct = $cart->products()->where('product_id',$productId)->first();
-
-       if($cartProduct){
-        $cart->products()->updateExistingPivot($productId, ['quantity' => $cartProduct->pivot->quantity + 1 ]);
-       }else{
-        $cart->products()->attach($productId,['quantity'=>1]);
-       }
-
-       return redirect()->back()->with('success','producto agregado');
-
+        $aux = $sesion->id;
+        $user = User::find($aux);
+    
+        $cart = $user->carts()->where('state', 1)->first();
+    
+        if(!$cart){
+            $cart=$this->create($user);
+        }
+    
+        $cartProduct = $cart->products()->where('product_id',$productId)->first();
+    
+        if($cartProduct){
+            $cart->products()->updateExistingPivot($productId, ['quantity' => $cartProduct->pivot->quantity + 1 ]);
+        }else{
+            $cart->products()->attach($productId,['quantity'=>1]);
+        }
+    
+        session()->flash('swal', [
+            'position' => "center",
+            'icon' => "success",
+            'title' => "Producto añadido al carrito correctamente",
+            'showConfirmButton' => false,
+            'timer' => 1500
+        ]);
+    
+        return redirect()->back()->with('success','producto agregado');
     }
+    
 
 
 

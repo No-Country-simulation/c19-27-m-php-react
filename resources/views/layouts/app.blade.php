@@ -52,6 +52,8 @@
             </main>
         </div>
 
+        @include('components.footer-layout')
+
         @stack('modals')
         @stack('js')
         @livewireScripts

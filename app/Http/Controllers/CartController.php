@@ -36,7 +36,11 @@ class CartController extends Controller
             }
          }
 
-        return view('cart.show',compact('products','total','cart'));
+             // Obtén productos recomendados
+          $recommendedProducts = Product::inRandomOrder()->take(4)->get();
+
+
+        return view('cart.show',compact('products','total','cart', 'recommendedProducts'));
     }
 
     /**

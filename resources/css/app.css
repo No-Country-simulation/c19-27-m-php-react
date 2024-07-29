@@ -30,7 +30,7 @@
     background: #007BFF; 
     border-radius:5px; 
     font-weight:900; 
-    font-size:25px;
+    font-size:20px;
 }
 
 .contenedor-descuentos{
@@ -41,5 +41,11 @@
     color: #007BFF; 
     font-size:90px;
 }
+
+/* para el icono del carrito */
+.text-neon-green {
+    color: #00FF85;
+}
+
 
 

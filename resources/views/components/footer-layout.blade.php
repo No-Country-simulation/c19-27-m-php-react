@@ -1,5 +1,5 @@
 <!-- resources/views/components/footer.blade.php -->
-<footer class="bg-blue-500 text-white py-8">
+<footer class="bg-blue-giga text-white py-8">
     <div class="container mx-auto px-4">
         <div class="flex justify-center space-x-8 mb-4">
             <a href="#" class="hover:underline">Sobre Nosotros</a>

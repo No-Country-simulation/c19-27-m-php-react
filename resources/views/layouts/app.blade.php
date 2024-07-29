@@ -47,7 +47,7 @@
         @stack('css')
         <x-banner />
 
-        <div class="min-h-screen bg-white">
+        <div class="min-h-screen bg-gray-50">
             @livewire('navigation-menu')
 
               <!-- Include Gray Bar Component -->

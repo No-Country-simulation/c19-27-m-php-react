@@ -18,6 +18,8 @@ export default {
             },
             colors: {
                 'neon-green': '#00FF85',
+                'gray-bar' : '#333333',
+                'blue-giga' : '#007BFF',
         },
         },
         conteiner: {

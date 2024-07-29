@@ -50,9 +50,11 @@
             <main class="">
                 {{ $slot }}
             </main>
+
+             @include('components.footer-layout')
         </div>
 
-        @include('components.footer-layout')
+       
 
         @stack('modals')
         @stack('js')

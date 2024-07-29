@@ -16,9 +16,12 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
-        //     colors: {
-        //         'neon-green': '#00FF85',
-        // },
+            colors: {
+                'neon-green': '#00FF85',
+        },
+        },
+        conteiner: {
+            center: true,
         },
     },
 

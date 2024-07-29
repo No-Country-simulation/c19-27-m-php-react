@@ -21,34 +21,40 @@ class PublicController extends Controller
     }
 
     public function products(Request $request)
-    {
-        //se definen las variables que reciben los distintos filtros y se instancia la función query
-        $searchTerm = $request->input('search');
-        $selectedCategories = $request->input('category', []);
-        $selectedBrands = $request->input('brand', []);
-        $query = Product::query();
+{
+    // Se definen las variables que reciben los distintos filtros y se instancia la función query
+    $searchTerm = $request->input('search');
+    $selectedCategories = $request->input('category', []);
+    $selectedBrands = $request->input('brand', []);
+    $query = Product::query();
 
-        //Validaciones para verificar bajo que filtros se hará la consulta
-        if ($searchTerm) {
-            $query->where('name', 'ILIKE', "%{$searchTerm}%");
+    // Validaciones para verificar bajo qué filtros se hará la consulta
+    if ($searchTerm) {
+        // Si el término de búsqueda tiene solo una letra, buscar productos que comiencen con esa letra
+        if (strlen($searchTerm) == 1) {
+            $query->where('name', 'LIKE', "{$searchTerm}%");
+        } else {
+            $query->where('name', 'LIKE', "%{$searchTerm}%");
         }
-
-        if (!empty($selectedCategories)) {
-            $query->whereIn('category_id', $selectedCategories);
-        }
-
-        if (!empty($selectedBrands)) {
-            $query->whereIn('brand_id', $selectedBrands);
-        }
-
-        $productCount = $query->count();
-        $products = $query->paginate(15);
-        $categories = Category::all();
-        $brands = Brand::all();
-
-        return view('website.products', compact('products', 'categories', 'brands', 'productCount'));
     }
 
+    if (!empty($selectedCategories)) {
+        $query->whereIn('category_id', $selectedCategories);
+    }
+
+    if (!empty($selectedBrands)) {
+        $query->whereIn('brand_id', $selectedBrands);
+    }
+
+    $productCount = $query->count();
+    $products = $query->paginate(15);
+    $categories = Category::all();
+    $brands = Brand::all();
+
+    return view('website.products', compact('products', 'categories', 'brands', 'productCount'));
+}
+
+    
 
 
     //product detail

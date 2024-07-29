@@ -1,15 +1,17 @@
 
 <x-app-layout>
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Carrito de Compras</title>
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    </head>
-    <body class="bg-gray-100">
-        <div class="container mx-auto p-4">
-            <h1 class="text-2xl font-bold mb-4">Carrito de Compras</h1>
+   <h1 class="text-2xl font-bold mb-4">Carrito de Compras</h1>
 
+        <div class="container">
+            <div class="grid  grid-cols-2">
+                <div class="card bg-slate-400">
+                    hola
+                </div>
+                <div>
+
+                </div>
+
+            </div>
             @if(isset($products) && $products->isNotEmpty())
                 <h2 class="text-xl font-semibold mb-2">Productos en tu carrito:</h2>
                 <ul class="bg-white shadow rounded-lg p-4">
@@ -48,7 +50,6 @@
                 </div>
             @endif
         </div>
-    </body>
-    </html>
+  
 
 </x-app-layout>

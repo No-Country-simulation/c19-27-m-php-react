@@ -83,7 +83,7 @@
             </div>
         </div>
         <div class="flex items-center justify-between">
-            <button class="btn btn-success" onclick="addToCart({{ $product->id }})" style="border-radius: 6px; background: #007BFF; color:white; width: 157.355px; height: 31.857px;">Agregar al carrito</button>
+            <button class="btn btn-success" onclick="addToCart('{{ $product->id }}')" style="border-radius: 6px; background: #007BFF; color:white; width: 157.355px; height: 31.857px;">Agregar al carrito</button>
         </div>
     </div>
 </div>

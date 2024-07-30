@@ -23,13 +23,17 @@
                                             @csrf
                                             <input type="hidden" name="cart_id" value="{{ $cart->id }}">
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <button type="submit" name="action" value="update" class="bg-blue-500 text-white p-2 mr-2 rounded">
+                                                <i class="fas fa-sync-alt"></i>
+                                            </button>
                                             <button type="button" class="bg-gray-200 text-gray-600 p-2 rounded-l decrement-btn">-</button>
-                                            <input type="number" name="quantity" value="{{ $product->pivot->quantity }}" min="1" max="20" class="quantity-input w-16 text-center border-none" readonly>
-                                            <button type="button" class="bg-gray-200 text-gray-600 p-2 rounded-r increment-btn">+</button>
+                                            <input type="number" name="quantity" value="{{ $product->pivot->quantity }}" min="1" max="{{ $product->quantity }}" class="quantity-input w-12 text-center border-none" readonly>
+                                            <button type="button" class="bg-gray-200 text-gray-600 p-2 rounded-r increment-btn">+</button>                                          
                                             <button type="submit" name="action" value="remove" class="bg-red-500 text-white p-2 ml-2 rounded">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
+                                        
                                     </div>
                                 </div>
                             </li>
@@ -108,45 +112,46 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            function updateTotalPrice() {
-                let total = 0;
-                let totalQuantity = 0;
-                $('.quantity-input').each(function() {
-                    const quantity = parseInt($(this).val());
-                    const price = parseFloat($(this).closest('li').find('.price').data('price'));
-                    if (!isNaN(quantity) && !isNaN(price)) {
-                        total += quantity * price;
-                        totalQuantity += quantity;
-                    }
-                });
-                $('.total-price').text('$' + total.toFixed(2));
-                $('.total-quantity').text(totalQuantity + ' productos');
+   $(document).ready(function() {
+    function updateTotalPrice() {
+        let total = 0;
+        let totalQuantity = 0;
+        $('.quantity-input').each(function() {
+            const quantity = parseInt($(this).val());
+            const price = parseFloat($(this).closest('li').find('.price').data('price'));
+            if (!isNaN(quantity) && !isNaN(price)) {
+                total += quantity * price;
+                totalQuantity += quantity;
             }
-
-            $('.increment-btn').click(function() {
-                const $input = $(this).prev('.quantity-input');
-                let value = parseInt($input.val());
-                if (value < {{$product->quantity}}) {
-                    value++;
-                    $input.val(value);
-                    updateTotalPrice();
-                }
-            });
-
-            $('.decrement-btn').click(function() {
-                const $input = $(this).next('.quantity-input');
-                let value = parseInt($input.val());
-                if (value > 1) {
-                    value--;
-                    $input.val(value);
-                    updateTotalPrice();
-                }
-            });
-
-            // Inicializar el precio total en la carga de la página
-            updateTotalPrice();
         });
+        $('.total-price').text('$' + total.toFixed(2));
+        $('.total-quantity').text(totalQuantity + ' productos');
+    }
+
+    $('.increment-btn').click(function() {
+        const $input = $(this).siblings('.quantity-input');
+        const maxQuantity = parseInt($input.attr('max'));
+        let value = parseInt($input.val());
+        if (value < maxQuantity) {
+            value++;
+            $input.val(value);
+            updateTotalPrice();
+        }
+    });
+
+    $('.decrement-btn').click(function() {
+        const $input = $(this).siblings('.quantity-input');
+        let value = parseInt($input.val());
+        if (value > 1) {
+            value--;
+            $input.val(value);
+            updateTotalPrice();
+        }
+    });
+
+    // Inicializar el precio total en la carga de la página
+    updateTotalPrice();
+});
     </script>
 </x-app-layout>
 

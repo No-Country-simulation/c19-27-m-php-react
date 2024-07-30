@@ -160,7 +160,30 @@ class CartController extends Controller
     
         return redirect()->back()->with('success','producto agregado');
     }
+    public function updateOrRemove(Request $request, $productId)
+    {
+        $cart = Cart::find($request->cart_id);
+        $product = Product::find($productId);
     
+        if ($request->action == 'update') {
+            $quantity = $request->quantity;
+            if ($quantity > $product->quantity) {
+                return redirect()->back()->withErrors(['message' => 'La cantidad solicitada excede la cantidad disponible en el inventario.']);
+            }
+    
+            $cart->products()->updateExistingPivot($productId, ['quantity' => $quantity]);
+            session()->flash('success', 'Cantidad actualizada correctamente.');
+        }
+    
+        if ($request->action == 'remove') {
+            $cart->products()->detach($productId);
+            session()->flash('success', 'Producto eliminado del carrito.');
+        }
+    
+        return redirect()->route('cart.index');
+    }
+    
+
 
 
 

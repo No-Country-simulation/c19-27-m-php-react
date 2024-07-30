@@ -93,7 +93,7 @@
             @canany($link['can'] ?? [null])
             <a href="{{ $link['url'] ?? '#'}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group {{ $link['active'] ? 'bg-gray-100 dark:bg-gray-700' : ''}}">
               
-                <i class="{{ $link['icon'] }} text-green-400"></i>
+                <i class="{{ $link['icon'] }} text-neon-green"></i>
               
                <span class="ms-3 text-gray-700">
                   {{ $link['name'] }}

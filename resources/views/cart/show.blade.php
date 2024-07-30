@@ -12,7 +12,7 @@
                             <li class="border-b border-gray-200 py-4">
                                 <div class="flex justify-between items-center">
                                     <div class="flex items-center">
-                                        <img src="{{ $product->image }}" alt="Imagen" class="w-32 h-32 object-cover rounded-lg mr-4">
+                                        <img src="{{ $product->image ? Storage::url($product->image) : 'path/to/default-image.jpg' }}" alt="Imagen" class="w-32 h-32 object-cover rounded-lg mr-4">
                                         <div>
                                             <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
                                             <p class="text-gray-700 price" data-price="{{ $product->price }}">${{ number_format($product->price, 2) }}</p>
@@ -69,7 +69,7 @@
         @foreach($recommendedProducts as $product)
             <div class="bg-white rounded-sm shadow-md overflow-hidden">
                 <a href="#">
-                    <img class="p-2 rounded-t-lg" src="{{ $product->image }}" alt="product image" />
+                    <img class="p-2 rounded-t-lg object-cover object-center w-full h-64" src="{{ $product->image }}" alt="product image" />
                 </a>
                 <div class="px-5 pb-5">
                     <a href="#">

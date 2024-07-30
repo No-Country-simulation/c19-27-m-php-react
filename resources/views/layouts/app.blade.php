@@ -27,8 +27,7 @@
 
         <!-- Styles -->
         @livewireStyles
-
-
+  
         <style>
             /* Webkit browsers (Chrome, Safari) */
             .quantity-input::-webkit-outer-spin-button,

@@ -55,7 +55,7 @@
 
 <div class="bg-white rounded-sm shadow-md overflow-hidden">
     <a href="#">
-        <img class="p-2 rounded-t-lg" src="{{ $product->image }}" alt="product image" />
+        <img class="p-2 rounded-t-lg" src="{{ $product->image ? Storage::url($product->image) : 'path/to/default-image.jpg' }}" alt="product image" />
     </a>
     <div class="px-5 pb-5">
         <a href="#">

@@ -115,7 +115,7 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
-      
+        $data = $request->except(['image']);
     // Verificar si hay una nueva imagen y manejar el almacenamiento
     if ($request->hasFile('image')) {
         // Eliminar la imagen anterior si existe

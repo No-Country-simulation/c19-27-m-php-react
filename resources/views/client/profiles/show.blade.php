@@ -1,20 +1,50 @@
 <x-admin-layout>
 
- 
- 
+
+
+   
     <div class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
 
-        <h1 class="text-xl text-gray-700 font-bold mb-4">Datos del usuario</h1>
-        <x-label class="mb-2 ">
+        <h1 class="text-xl text-gray-700 font-bold mb-4">Datos personales</h1>
+        <x-label class="mb-2">
          Nombre
         </x-label>
         <x-input
         disabled
         name="name" 
-         class="block mt-1 w-full bg-slate-100"
+         class="block mb-2 w-full bg-slate-100"
          value="{{ $user->name }}"/>
 
+         <x-label class="mb-1 ">
+            DNI
+           </x-label>
+           <x-input
+           disabled
+           name="dni" 
+            class="block mt-1 w-full bg-slate-100"
+            value="{{ old('dni', $user->profile ? $user->profile->dni : '') }}"/>
+
          <x-label class="mb-2 mt-2">
+            Fecha de nacimiento
+           </x-label>
+           <x-input
+           type="date"
+           disabled
+           name="date_of_birth" 
+            class="block mt-1 w-full bg-slate-100"
+            value="{{ old('date_of_birth', $user->profile ? $user->profile->date_of_birth : '') }}"
+            />
+
+         <x-label class="mb-2 mt-2">
+            Número de celular
+           </x-label>
+           <x-input
+           disabled
+           name="phone_number" 
+            class="block mt-1 w-full bg-slate-100"
+            value="{{ $user->phone_number }}"/>
+
+           <x-label class="mb-2 mt-2">
             Email
            </x-label>
            <x-input
@@ -24,36 +54,18 @@
             value="{{ $user->email }}"/>
         
             <x-label class="mb-2 mt-2">
-                Número de celular
+                Contraseña
                </x-label>
                <x-input
+               type="password"
                disabled
-               name="phone_number" 
+               name="password" 
                 class="block mt-1 w-full bg-slate-100"
-                value="{{ $user->phone_number }}"/>
+                value="{{ $user->password }}"/>
     </div>
+    
     <div class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-
-        <h1 class="text-xl text-gray-700 font-bold mb-4">Roles del usuario</h1>
-        <x-label class="mb-2">
-            Roles asignados
-        </x-label>
-            @if ($user->roles->isEmpty())
-                <p class=" bg-red-100 border border-red-300 text-red-700 rounded py-2 px-4">Este usuario no posee ningún rol.</p>
-            @else
-            <ul class="list-disc list-inside mt-2 mb-4">
-                @foreach ($user->roles as $role)
-                    <li class="bg-slate-100 rounded px-4 py-2 -mb-1">
-                        {{ $role->name }}
-                    </li>
-                @endforeach
-            </ul>
-            @endif
-       
-        
-    </div>
-    <div class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h1 class="text-xl text-gray-700 font-bold mb-4">Dirección del usuario</h1>
+        <h1 class="text-xl text-gray-700 font-bold mb-4">Datos de envio</h1>
 
         <x-label class="mb-2 mt-2">
             Dirección
@@ -110,20 +122,13 @@
                             value="{{ $user->state }}"/>        
     </div>
     <div class="flex items-center justify-end mt-4">
-        <form action="{{ route('admin.users.destroy', $user) }}" method="POST">
-        @csrf 
-        @method('DELETE')
-        <input type="text" hidden name="id" value="{{ $user->id }}">
 
-        <x-validation-errors class="mb-4"/>
-        <x-danger-button class="mr-2"
-        type="submit">
-            eliminar
-        </x-danger-button>
-    </form>
+    <x-button class="mr-3 bg-blue-600">
+        <a href="{{ route('client.profiles.edit') }}">Editar</a>
+    </x-button>   
     <x-button>
         <a href="{{ route('admin.users.index') }}">volver</a>
     </x-button>
+    
     </div>
-
 </x-admin-layout>

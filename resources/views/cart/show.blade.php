@@ -107,6 +107,11 @@
             </div>
         @endforeach
     </div>
+
+    <form id="cart-form" method="POST" style="display: none;">
+        @csrf
+        <input type="hidden" name="product_id" id="product_id">
+    </form>
 </div>
 
     </div>
@@ -152,6 +157,20 @@
     // Inicializar el precio total en la carga de la página
     updateTotalPrice();
 });
+    </script>
+     <script>
+        function addToCart(productId) {
+            // Actualiza el campo oculto del formulario con el ID del producto
+            document.getElementById('product_id').value = productId;
+    
+            // Actualiza la acción del formulario con el ID del producto
+            var form = document.getElementById('cart-form');
+            var actionUrl = "{{ url('cart/add') }}/" + productId;
+            form.action = actionUrl;
+    
+            // Envía el formulario
+            form.submit();
+        }
     </script>
 </x-app-layout>
 

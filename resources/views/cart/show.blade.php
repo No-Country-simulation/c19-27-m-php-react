@@ -16,6 +16,8 @@
                                         <div>
                                             <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
                                             <p class="text-gray-700 price" data-price="{{ $product->price }}">${{ number_format($product->price, 2) }}</p>
+                                            <h3 class="text-lg font-semibold">Disponible:{{ $product->quantity }}</h3>
+
                                         </div>
                                     </div>
                                     <div class="flex items-center">
@@ -28,12 +30,12 @@
                                             </button>
                                             <button type="button" class="bg-gray-200 text-gray-600 p-2 rounded-l decrement-btn">-</button>
                                             <input type="number" name="quantity" value="{{ $product->pivot->quantity }}" min="1" max="{{ $product->quantity }}" class="quantity-input w-12 text-center border-none" readonly>
-                                            <button type="button" class="bg-gray-200 text-gray-600 p-2 rounded-r increment-btn">+</button>                                          
+                                            <button type="button" class="bg-gray-200 text-gray-600 p-2 rounded-r increment-btn">+</button>
                                             <button type="submit" name="action" value="remove" class="bg-red-500 text-white p-2 ml-2 rounded">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
-                                        
+
                                     </div>
                                 </div>
                             </li>

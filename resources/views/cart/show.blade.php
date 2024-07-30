@@ -127,7 +127,7 @@
             $('.increment-btn').click(function() {
                 const $input = $(this).prev('.quantity-input');
                 let value = parseInt($input.val());
-                if (value < 20) {
+                if (value < {{$product->quantity}}) {
                     value++;
                     $input.val(value);
                     updateTotalPrice();

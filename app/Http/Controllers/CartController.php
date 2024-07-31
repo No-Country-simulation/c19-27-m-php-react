@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bill;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -85,7 +87,7 @@ class CartController extends Controller
 
     }
 
-    public function eliminateProduct(Request $request)
+    /*public function eliminateProduct(Request $request)
     {
         $request->validate([
             'cart_id' => 'required|integer',
@@ -105,24 +107,60 @@ class CartController extends Controller
         } else {
             return redirect()->back()->with('error', 'Carrito no encontrado');
         }
-    }
+    }*/
 
 
     public function finished()
     {
+        DB::transaction(function () {
+
+
         $sesion = Auth::user();
         $user = User::find($sesion->id);
 
         $cart = $user->carts()->where('state', 1)->first();
-
-       // $cart = Cart::find($aux->id);
-
         if($cart){
+
+            $bill = Bill::create([
+                'user_id'=>$user->id,
+                'date'=>now(),
+                'total'=>0,
+                'state'=>1
+            ]);
+
+
+
+            $products = $cart->products()->orderBy('name')->get();
+
+            $total =0;
+
+        foreach($products as $product){
+
+            $bought = $product->pivot->quantity;
+            $price = $product->price;
+            $subtotal = $bought*$price;
+
+            $total +=$subtotal;
+
+            $product->decrement('quantity',$bought);
+
+            $bill->products()->attach($product->id, [
+                'quantity' => $bought,
+                'subtotal' => $subtotal,
+            ]);
+        }
+
+            $bill->total = $total;
+            $bill->save();
+
             $cart->state = 0;
             $cart->save();
         }
+    });
 
     }
+
+
 
     public function list(){
 
@@ -131,25 +169,27 @@ class CartController extends Controller
 
     }
 
+
+
+
     public function add($productId){
         $sesion= Auth::user();
         $aux = $sesion->id;
         $user = User::find($aux);
-    
+
         $cart = $user->carts()->where('state', 1)->first();
-    
+
         if(!$cart){
             $cart=$this->create($user);
         }
-    
+
         $cartProduct = $cart->products()->where('product_id',$productId)->first();
-    
         if($cartProduct){
             $cart->products()->updateExistingPivot($productId, ['quantity' => $cartProduct->pivot->quantity + 1 ]);
         }else{
             $cart->products()->attach($productId,['quantity'=>1]);
         }
-    
+
         session()->flash('swal', [
             'position' => "center",
             'icon' => "success",
@@ -157,32 +197,34 @@ class CartController extends Controller
             'showConfirmButton' => false,
             'timer' => 1500
         ]);
-    
+
         return redirect()->back()->with('success','producto agregado');
     }
+
+
     public function updateOrRemove(Request $request, $productId)
     {
         $cart = Cart::find($request->cart_id);
         $product = Product::find($productId);
-    
+
         if ($request->action == 'update') {
             $quantity = $request->quantity;
             if ($quantity > $product->quantity) {
                 return redirect()->back()->withErrors(['message' => 'La cantidad solicitada excede la cantidad disponible en el inventario.']);
             }
-    
+
             $cart->products()->updateExistingPivot($productId, ['quantity' => $quantity]);
             session()->flash('success', 'Cantidad actualizada correctamente.');
         }
-    
+
         if ($request->action == 'remove') {
             $cart->products()->detach($productId);
             session()->flash('success', 'Producto eliminado del carrito.');
         }
-    
+
         return redirect()->route('cart.index');
     }
-    
+
 
 
 

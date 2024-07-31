@@ -34,5 +34,9 @@ class Product extends Model
     public function carts():BelongsToMany{
         return $this->belongsToMany(Cart::class, 'car_product')->withPivot('quantity');
     }
-        
+
+    public function bills():BelongsToMany{
+        return $this->belongsToMany(Bill::class, 'bill_product')->withPivot('quantity','subtotal');
+    }
+
 }

@@ -45,6 +45,36 @@ class CartController extends Controller
         return view('cart.show', compact('products', 'total', 'cart', 'recommendedProducts'));
     }
 
+
+    public function confirmarCompra()
+    {
+       $sesion= Auth::user();
+       $aux = $sesion->id;
+       $user = User::find($aux);
+
+
+         $cart = $user->carts()->where('state', 1)->first();
+
+         $total=0;
+
+         if(!$cart){
+            $cart=$this->create($user);
+            $products =collect();
+         }else{
+            $products = $cart->products()->orderBy('name')->get();
+
+            foreach($cart->products as $product){
+                $total+=$product->pivot->quantity*$product->price;
+            }
+         }
+
+             // Obtén productos recomendados
+          $recommendedProducts = Product::inRandomOrder()->take(4)->get();
+
+
+        return view('cart.confirm',compact('products','total','cart', 'recommendedProducts'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

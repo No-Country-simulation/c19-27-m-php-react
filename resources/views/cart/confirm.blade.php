@@ -1,7 +1,39 @@
 <x-app-layout>
-    <div class="container mx-auto px-4 py-8">
+<div class="progress-container">
+        <div class="progress">
+            <div class="progress-step">
+                <div class="circle">1</div>
+                <div class="label">Información</div>
+            </div>
+            <div class="progress-step">
+                <div class="circle">2</div>
+                <div class="label">Dirección de envío</div>
+            </div>
+            <div class="progress-step">
+                <div class="circle">3</div>
+                <div class="label">Método de envío</div>
+            </div>
+            <div class="progress-step">
+                <div class="circle">4</div>
+                <div class="label">Forma de pago</div>
+            </div>
+            <div class="progress-step">
+                <div class="circle">5</div>
+                <div class="label">Revisión y aprobación</div>
+            </div>
+        </div>
+    </div>
+    <div class="notification">
+        <div class="icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="message">
+            El correo ya se encuentra registrado, se ha completado el formulario automáticamente con tus datos.
+        </div>
+    </div>
+    <div class="container mx-auto px-4 py-8 mt-5">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="col-span-2">
+            <div class="col-span-2 hidden">
                 <div class="flex items-center mb-2">
                     <h2 class="text-xl font-semibold">Carrito:</h2>
                     <span class="text-gray-700 ml-2">(<span class="total-quantity">{{ $products->sum('pivot.quantity') }}</span>)</span>
@@ -47,6 +79,24 @@
                     </div>
                 @endif
             </div>
+
+            <div class="col-span-2">
+                    <ul class="bg-white shadow rounded-lg p-4">
+                            <li class="border-b border-gray-200 py-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div>
+                                            <h1 class="text-lg font-semibold" style="font-size:35px; margin-bottom:9rem;">Tus datos</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h3 class="text-lg mt-3">Editar tus datos</h3>
+                            </li>
+                    </ul> 
+            </div>
+            
+            
             <div class="col-span-1">
                 <h2 class="text-xl font-semibold mb-2">Resumen de la orden</h2>
                 <div class="bg-white p-4 rounded-lg shadow-md top-4">
@@ -62,53 +112,73 @@
                             <span class="font-semibold text-gray-900 total-price">${{ number_format($total, 2) }}</span>
                         </div>
                     </div>
-                    <a href="{{ route('website.products') }}" class="bg-blue-500 text-white font-bold py-2 rounded w-full mt-4 text-center block">Seguir comprando</a>
-                    <a href="{{ route('cart.confirm.cart') }}" class="bg-blue-500 text-white font-bold py-2 rounded w-full mt-4 text-center block">Continuar compra</a>
+                    <a href="{{ route('website.products') }}" class="bg-blue-500 text-white font-bold py-2 rounded w-full mt-4 text-center block">Editar la compra</a>
                 </div>
+            </div>
+
+            <div class="col-span-2" style="top:-3rem;">
+                    <ul class="bg-white shadow rounded-lg p-4">
+                            <li class="border-b border-gray-200 py-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div>
+                                            <h1 class="text-lg font-semibold" style="font-size:35px; margin-bottom:9rem;">Direccion de envío</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h3 class="text-lg mt-3">Editar tus datos</h3>
+                            </li>
+                    </ul> 
+            </div>
+            <div class="col-span-2">
+                    <ul class="bg-white shadow rounded-lg p-4">
+                            <li class="border-b border-gray-200 py-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div>
+                                            <h1 class="text-lg font-semibold" style="font-size:35px; margin-bottom:9rem;">Método de envío</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h3 class="text-lg mt-3">Editar tus datos</h3>
+                            </li>
+                    </ul> 
+            </div>
+            <div class="col-span-2">
+                    <ul class="bg-white shadow rounded-lg p-4">
+                            <li class="border-b border-gray-200 py-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div>
+                                            <h1 class="text-lg font-semibold" style="font-size:35px; margin-bottom:9rem;">Forma de Pago</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h3 class="text-lg mt-3">Editar tus datos</h3>
+                            </li>
+                    </ul> 
+            </div>
+            <div class="col-span-2">
+                    <ul class="bg-white shadow rounded-lg p-4">
+                            <li class="border-b border-gray-200 py-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div>
+                                            <h1 class="text-lg font-semibold" style="font-size:35px; margin-bottom:9rem;">Revisión y aprobación</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h3 class="text-lg mt-3">Editar tus datos</h3>
+                            </li>
+                    </ul> 
             </div>
         </div>
 
-        <!-- Recomendaciones de productos -->
-<div class="mt-8">
-    <h2 class="text-xl font-semibold mb-4">Recomendaciones para ti</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        @foreach($recommendedProducts as $product)
-            <div class="bg-white rounded-sm shadow-md overflow-hidden">
-                <a href="#">
-                    <img class="p-2 rounded-t-lg object-cover object-center w-full h-64" src="{{ $product->image }}" alt="product image" />
-                </a>
-                <div class="px-5 pb-5">
-                    <a href="#">
-                        <h5 class="text-xl font-semibold tracking-tight text-gray-900 ">{{ $product->name }}</h5>
-                    </a>
-                    <p class="text-gray-700">{{ $product->description }}</p>
-                    <div class="flex items-center justify-between mt-2.5 mb-5">
-                        <span class="text-lg font-bold text-gray-900 ">${{ $product->price }}</span>
-                        <div class="flex items-center space-x-1 rtl:space-x-reverse">
-                            <svg class="w-3 h-3 text-neon-green" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                            </svg>
-                            <svg class="w-3 h-3 text-neon-green" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                            </svg>
-                            <svg class="w-3 h-3 text-neon-green" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                            </svg>
-                            <svg class="w-3 h-3 text-neon-green" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                            </svg>
-                            <svg class="w-3 h-3 text-gray-200 dark:text-neon-green" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <button class="btn btn-success" onclick="addToCart('{{ $product->id }}')" style="border-radius: 6px; background: #007BFF; color:white; width: 157.355px; height: 31.857px;">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
+
 
     <form id="cart-form" method="POST" style="display: none;">
         @csrf

@@ -53,11 +53,9 @@
         // Clientes
         [
             'name' => 'Mi Cuenta',
-            // 'url' => route('admin.permissions.index'),
-            // 'active' => request()->routeIs('admin.permissions.*'),
-            'active' => false, // Estado activo predeterminado
+            'url' => route('client.profiles.show'),
+            'active' => request()->routeIs('client.profiles.*'),
             'icon' => 'fa-solid fa-user',
-            'can' => ['permission-access']
         ],
         [
             'name' => 'Mis Compras',
@@ -65,7 +63,6 @@
             // 'active' => request()->routeIs('admin.permissions.*'),
             'active' => false, // Estado activo predeterminado
             'icon' => 'fa-solid fa-basket-shopping',
-            'can' => ['permission-access']
         ],
         [
             'name' => 'Favoritos',
@@ -73,7 +70,6 @@
             // 'active' => request()->routeIs('admin.permissions.*'),
             'active' => false, // Estado activo predeterminado
             'icon' => 'fa-solid fa-heart',
-            'can' => ['permission-access']
         ],
 
     ];

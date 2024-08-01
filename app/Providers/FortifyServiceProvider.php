@@ -49,5 +49,9 @@ class FortifyServiceProvider extends ServiceProvider
             // Aquí verificamos si el usuario tiene algún rol con acceso a la administración
             return $user->hasRole();// Ajusta el rol según tu configuración
         });
+        Gate::define('client', function ($user) {
+            // Aquí verificamos si el usuario tiene algún rol con acceso a la administración
+            return $user->hasRole();// Ajusta el rol según tu configuración
+        });
     }
 }

@@ -2,15 +2,16 @@
 
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\CartController;
 
 
 /*
@@ -119,6 +120,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
 Route::group([ 'middleware' => ['auth']], function () {
 
+// profile
+Route::get('/profile', [ProfileController::class, 'show'])->name('client.profiles.show');
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('client.profiles.edit');
+Route::put('/profile', [ProfileController::class, 'update'])->name('client.profiles.update');
 
 //Carrito de compras
 Route::get('/cart', [CartController::class, 'index'])->name('cart.show.cart');

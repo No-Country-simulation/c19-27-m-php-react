@@ -73,9 +73,13 @@
                                     </x-dropdown-link>
                                 @endif
                                 {{-- Crear y Agregar ruta client.profile.show --}}
-                                <x-dropdown-link href="{{ route('profile.show') }}">
-                                    Perfil
+                                
+                                @if (Auth::user())
+                                <x-dropdown-link href="{{ route('client.profiles.show') }}">
+                                    Mi Cuenta
                                 </x-dropdown-link>
+                            @endif
+                             
                                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                     <x-dropdown-link href="{{ route('api-tokens.index') }}">
                                         {{ __('API Tokens') }}

@@ -37,7 +37,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 // Rutas públicas
 Route::get('/', [PublicController::class, 'index'])->name('website.index');
-Route::get('/home', [PublicController::class, 'index'])->name('website.index');
+Route::get('/home', [PublicController::class, 'index'])->name('website.index.2');
 Route::get('/productlist', [PublicController::class, 'products'])->name('website.products');
 
 
@@ -45,11 +45,11 @@ Route::get('/productlist', [PublicController::class, 'products'])->name('website
 
 // Rutas privadas
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
-    
+
 
     // Dashboard
     Route::group(['prefix' => 'dashboard'], function () {
-        Route::get('/', [DashboardController::class, 'index'])->middleware(['can:dashboard-access'])->name('dashboard.dashboard');    
+        Route::get('/', [DashboardController::class, 'index'])->middleware(['can:dashboard-access'])->name('dashboard.dashboard');
     });
 
 
@@ -126,6 +126,9 @@ Route::post('/cart/updateOrRemove/{productId}', [CartController::class, 'updateQ
 Route::get('/cart/change', [CartController::class, 'finished'])->name('cart.finished');
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/user/productlist', [CartController::class, 'list'])->name('user.list');
+Route::get('/bill/{bill}', [CartController::class, 'showBill'])->name('bill.show');
+
+
 
 });
 

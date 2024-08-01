@@ -18,31 +18,31 @@ class CartController extends Controller
      */
     public function index()
     {
-       $sesion= Auth::user();
-       $aux = $sesion->id;
-       $user = User::find($aux);
+        $sesion = Auth::user();
+        $aux = $sesion->id;
+        $user = User::find($aux);
 
 
-         $cart = $user->carts()->where('state', 1)->first();
+        $cart = $user->carts()->where('state', 1)->first();
 
-         $total=0;
+        $total = 0;
 
-         if(!$cart){
-            $cart=$this->create($user);
-            $products =collect();
-         }else{
+        if (!$cart) {
+            $cart = $this->create($user);
+            $products = collect();
+        } else {
             $products = $cart->products()->orderBy('name')->get();
 
-            foreach($cart->products as $product){
-                $total+=$product->pivot->quantity*$product->price;
+            foreach ($cart->products as $product) {
+                $total += $product->pivot->quantity * $product->price;
             }
-         }
+        }
 
-             // Obtén productos recomendados
-          $recommendedProducts = Product::inRandomOrder()->take(4)->get();
+        // Obtén productos recomendados
+        $recommendedProducts = Product::inRandomOrder()->take(4)->get();
 
 
-        return view('cart.show',compact('products','total','cart', 'recommendedProducts'));
+        return view('cart.show', compact('products', 'total', 'cart', 'recommendedProducts'));
     }
 
     /**
@@ -64,9 +64,9 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-        $sesion= Auth::user();
+        $sesion = Auth::user();
         $aux = $sesion->id;
-       $user = User::find($aux);
+        $user = User::find($aux);
 
         $cart = $user->carts()->where('id', $request->input('cart_id'))->first();
 
@@ -74,17 +74,15 @@ class CartController extends Controller
             return redirect()->back()->with('error', 'No se encontró el carrito activo');
         }
 
-        if($request->action === 'update'){
+        if ($request->action === 'update') {
             $cart->products()->updateExistingPivot($request->input('product_id'), ['quantity' => $request->input('quantity')]);
             return redirect()->back()->with('success', 'Cantidad actualizada correctamente');
-        }elseif($request->action === 'remove'){
+        } elseif ($request->action === 'remove') {
             $cart->products()->detach($request->input('product_id'));
             return redirect()->back()->with('success', 'Producto eliminado del carrito');
         }
 
         return redirect()->back()->with('error', 'Acción no válida');
-
-
     }
 
     /*public function eliminateProduct(Request $request)
@@ -115,79 +113,89 @@ class CartController extends Controller
         DB::transaction(function () {
 
 
-        $sesion = Auth::user();
-        $user = User::find($sesion->id);
+            $sesion = Auth::user();
+            $user = User::find($sesion->id);
 
-        $cart = $user->carts()->where('state', 1)->first();
-        if($cart){
+            $cart = $user->carts()->where('state', 1)->first();
+            if ($cart) {
 
-            $bill = Bill::create([
-                'user_id'=>$user->id,
-                'date'=>now(),
-                'total'=>0,
-                'state'=>1
-            ]);
+                $bill = Bill::create([
+                    'user_id' => $user->id,
+                    'date' => now(),
+                    'total' => 0,
+                    'state' => 1
+                ]);
 
 
 
-            $products = $cart->products()->orderBy('name')->get();
+                $products = $cart->products()->orderBy('name')->get();
 
-            $total =0;
+                $total = 0;
 
-        foreach($products as $product){
+                foreach ($products as $product) {
 
-            $bought = $product->pivot->quantity;
-            $price = $product->price;
-            $subtotal = $bought*$price;
+                    $bought = $product->pivot->quantity;
+                    $price = $product->price;
+                    $subtotal = $bought * $price;
 
-            $total +=$subtotal;
+                    $total += $subtotal;
 
-            $product->decrement('quantity',$bought);
+                    $product->decrement('quantity', $bought);
 
-            $bill->products()->attach($product->id, [
-                'quantity' => $bought,
-                'subtotal' => $subtotal,
-            ]);
-        }
+                    $bill->products()->attach($product->id, [
+                        'quantity' => $bought,
+                        'subtotal' => $subtotal,
+                    ]);
+                }
 
-            $bill->total = $total;
-            $bill->save();
+                $bill->total = $total;
+                $bill->save();
 
-            $cart->state = 0;
-            $cart->save();
-        }
-    });
+                $cart->state = 0;
+                $cart->save();
+
+            }
+
+        });
+
+
+    }
+
+    public function showBill(Bill $bill){
+
+    return view('cart.bill', compact('bill'));
 
     }
 
 
 
-    public function list(){
+    public function list()
+    {
 
         $products = Product::paginate(15);
-        return view('cart.change', compact('products'));
-
+        return view('cart.list', compact('products'));
     }
 
 
 
 
-    public function add($productId){
-        $sesion= Auth::user();
+    public function add($productId)
+    {
+        $sesion = Auth::user();
         $aux = $sesion->id;
         $user = User::find($aux);
 
         $cart = $user->carts()->where('state', 1)->first();
 
-        if(!$cart){
-            $cart=$this->create($user);
+        if (!$cart) {
+            $cart = $this->create($user);
         }
 
-        $cartProduct = $cart->products()->where('product_id',$productId)->first();
-        if($cartProduct){
-            $cart->products()->updateExistingPivot($productId, ['quantity' => $cartProduct->pivot->quantity + 1 ]);
-        }else{
-            $cart->products()->attach($productId,['quantity'=>1]);
+        $cartProduct = $cart->products()->where('product_id', $productId)->first();
+        if ($cartProduct) {
+            $cart->products()->updateExistingPivot($productId, ['quantity' => $cartProduct->pivot->quantity + 1]);
+        } else {
+            $cart->products()->attach($productId, ['quantity' => 1]);
         }
 
         session()->flash('swal', [
@@ -198,7 +206,7 @@ class CartController extends Controller
             'timer' => 1500
         ]);
 
-        return redirect()->back()->with('success','producto agregado');
+        return redirect()->back()->with('success', 'producto agregado');
     }
 
 
@@ -245,10 +253,10 @@ class CartController extends Controller
      */
     public function show(string $id)
     {
-         $user=User::find(1);
+        $user = User::find(1);
         $cart = $user->carts()->where('state', 1)->with('products')->first();
 
-         return response()->json($cart,200);
+        return response()->json($cart, 200);
     }
 
     /**

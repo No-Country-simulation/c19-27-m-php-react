@@ -4,7 +4,7 @@
             <!-- Tarjetas -->
             @foreach ($products as $product)
             <div class="bg-white rounded-sm shadow-md overflow-hidden">
-                <img src="{{ $product->image }}" alt="Imagen" class="w-full h-48 object-cover">
+                <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" >
                 <div class="p-4">
                     <h2 class="text-lg font-bold mb-2">{{ $product->name }}</h2>
                     <p class="text-gray-700">{{ $product->description }}</p>

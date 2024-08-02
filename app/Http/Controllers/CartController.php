@@ -74,7 +74,7 @@ class CartController extends Controller
           $recommendedProducts = Product::inRandomOrder()->take(4)->get();
 
 
-        return view('cart.confirm',compact('products','total','cart', 'recommendedProducts'));
+        return view('cart.confirm',compact('products','total','cart', 'recommendedProducts', 'sesion', 'user'));
     }
 
     /**
@@ -201,6 +201,8 @@ class CartController extends Controller
         }
     }
     public function showBill(Bill $bill){
+
+        $bill = Bill::with(['products', 'user'])->findOrFail($bill->id);
 
     return view('cart.bill', compact('bill'));
 

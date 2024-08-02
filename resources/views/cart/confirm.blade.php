@@ -86,7 +86,12 @@
                                 <div class="flex justify-between items-center">
                                     <div class="flex items-center">
                                         <div>
-                                            <h1 class="text-lg font-semibold" style="font-size:35px; margin-bottom:9rem;">Tus datos</h1>
+                                            <h1 class="text-lg font-semibold mb-4" style="font-size:35px;">Tus datos</h1>
+                                            <p class="mb-2"><strong>Nombre:</strong> {{ $user->name }}</p>
+                                            <p class="mb-2"><strong>DNI:</strong> {{$user->profile ? $user->profile->dni : '' }}</p>
+                                            <p class="mb-2"><strong>Email:</strong> {{ $user->email }}</p>
+                                            <p class="mb-2"><strong>Tel:</strong> {{ $user->phone_number}}</p>
+                                               
                                         </div>
                                     </div>
                                 </div>
@@ -124,12 +129,19 @@
                                 <div class="flex justify-between items-center">
                                     <div class="flex items-center">
                                         <div>
-                                            <h1 class="text-lg font-semibold" style="font-size:35px; margin-bottom:9rem;">Direccion de envío</h1>
+                                            <h1 class="text-lg font-semibold mb-4" style="font-size:35px;">Direccion de envío</h1>
+                                            <p class="mb-2"><strong>Dirección:</strong> {{ $user->address }}</p>
+                                            <p class="mb-2"><strong>Casa:</strong> {{ $user->house_number }}</p>
+                                            <p class="mb-2"><strong>Calle:</strong> {{ $user->street }}</p>
+                                            <p class="mb-2"><strong>CP:</strong> {{ $user->postal_code }}</p>
+                                            <p class="mb-2"><strong>Ciudad:</strong> {{ $user->city }}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
                                 <h3 class="text-lg mt-3">Editar tus datos</h3>
+
+
                             </li>
                     </ul> 
             </div>

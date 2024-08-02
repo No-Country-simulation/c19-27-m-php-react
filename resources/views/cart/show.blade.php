@@ -15,8 +15,8 @@
                                         <img src="{{ $product->image ? Storage::url($product->image) : 'path/to/default-image.jpg' }}" alt="Imagen" class="w-32 h-32 object-cover rounded-lg mr-4">
                                         <div>
                                             <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
-                                            <p class="text-gray-700 price" data-price="{{ $product->price }}">${{ number_format($product->price, 2) }}</p>
-                                            <h3 class="text-lg font-semibold">Disponible:{{ $product->quantity }}</h3>
+                                            <p class="text-gray-700 price font-semibold" data-price="{{ $product->price }}">${{ number_format($product->price, 2) }}</p>
+                                            <p class="text-gray-700">Disponible:({{ $product->quantity }})</p>
 
                                         </div>
                                     </div>

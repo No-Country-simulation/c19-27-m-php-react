@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Client\PurchaseController;
 use App\Http\Controllers\Admin\PermissionController;
 
 
@@ -135,7 +136,7 @@ Route::get('/user/productlist', [CartController::class, 'list'])->name('user.lis
 Route::get('/bill/{bill}', [CartController::class, 'showBill'])->name('bill.show');
 
 
-
+Route::get('/my-purchases', [PurchaseController::class, 'index'])->name('client.purchase.index');
 });
 
 

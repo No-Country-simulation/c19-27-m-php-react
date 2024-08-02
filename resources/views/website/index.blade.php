@@ -72,7 +72,7 @@
             <div class="w-1/4 p-2">
                 <div class="h-64 w-full max-w-sm rounded overflow-hidden shadow-lg mx-auto flex flex-col items-center" style="background:white">
                     <div class="h-48 w-full mt-6">
-                        <img class="h-full w-full object-cover" src="{{ $latestProduct->image }}" alt="Sunset in the mountains">
+                        <img class="h-full w-full object-cover object-center" src="{{ Storage::url($latestProduct->image) }}" alt="Sunset in the mountains">
                     </div>
                     <h2 class="text-center mt-2">{{ $latestProduct->name }}</h2>
                 </div>

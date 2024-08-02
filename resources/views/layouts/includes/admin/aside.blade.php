@@ -59,9 +59,8 @@
         ],
         [
             'name' => 'Mis Compras',
-            // 'url' => route('admin.permissions.index'),
-            // 'active' => request()->routeIs('admin.permissions.*'),
-            'active' => false, // Estado activo predeterminado
+            'url' => route('client.purchase.index'),
+            'active' => request()->routeIs('client.purchase.index'),
             'icon' => 'fa-solid fa-basket-shopping',
         ],
         [

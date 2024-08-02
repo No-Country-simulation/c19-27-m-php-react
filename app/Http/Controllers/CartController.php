@@ -117,29 +117,6 @@ class CartController extends Controller
         return redirect()->back()->with('error', 'Acción no válida');
     }
 
-    /*public function eliminateProduct(Request $request)
-    {
-        $request->validate([
-            'cart_id' => 'required|integer',
-            'product_id' => 'required|integer',
-            'quantity' => 'required|integer|min:1',
-        ]);
-
-        $sesion= Auth::user();
-        $aux = $sesion->id;
-       $user = User::find($aux);
-
-        $cart = $user->carts()->where('id', $request->input('cart_id'))->first();
-
-        if ($cart) {
-            $cart->products()->updateExistingPivot($request->input('product_id'), ['quantity' => $request->input('quantity')]);
-            return redirect()->back()->with('success', 'Cantidad actualizada correctamente');
-        } else {
-            return redirect()->back()->with('error', 'Carrito no encontrado');
-        }
-    }*/
-
-
     public function finished()
     {
         $billId = null;
@@ -208,8 +185,6 @@ class CartController extends Controller
 
     }
 
-
-
     public function list()
     {
 
@@ -217,11 +192,14 @@ class CartController extends Controller
         return view('cart.list', compact('products'));
     }
 
-
-
-
     public function add($productId)
     {
+        $user = Auth::user();  // Asigna directamente, no necesitas dos líneas para obtener el ID y luego encontrar al usuario.
+
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para realizar esta acción.');
+        }
+
         $sesion = Auth::user();
         $aux = $sesion->id;
         $user = User::find($aux);
@@ -229,7 +207,8 @@ class CartController extends Controller
         $cart = $user->carts()->where('state', 1)->first();
 
         if (!$cart) {
-            $cart = $this->create($user);
+            $cart = new Cart(['user_id' => $user->id, 'state' => 1]);
+            $cart->save();
         }
 
         $cartProduct = $cart->products()->where('product_id', $productId)->first();
@@ -247,7 +226,7 @@ class CartController extends Controller
             'timer' => 1500
         ]);
 
-        return redirect()->back()->with('success', 'producto agregado');
+        return redirect()->back();
     }
 
 
@@ -274,24 +253,6 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
-
-
-
-
-
-
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $user = User::find(1);
@@ -300,27 +261,4 @@ class CartController extends Controller
         return response()->json($cart, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

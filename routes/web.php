@@ -129,7 +129,7 @@ Route::put('/profile', [ProfileController::class, 'update'])->name('client.profi
 Route::get('/cart', [CartController::class, 'index'])->name('cart.show.cart');
 Route::get('/confirmcart', [CartController::class, 'confirmarCompra'])->name('cart.confirm.cart');
 Route::post('/cart/updateOrRemove/{productId}', [CartController::class, 'updateQuantity'])->name('cart.uOr');
-Route::get('/cart/change', [CartController::class, 'finished'])->name('cart.finished');
+Route::get('/cart/finished', [CartController::class, 'finished'])->name('cart.finished');
 Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/user/productlist', [CartController::class, 'list'])->name('user.list');
 Route::get('/bill/{bill}', [CartController::class, 'showBill'])->name('bill.show');

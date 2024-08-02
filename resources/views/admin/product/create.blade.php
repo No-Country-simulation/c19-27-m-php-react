@@ -65,7 +65,7 @@
                 </x-label>
                 <x-select name="category_id" class="w-full">
                     @foreach ($categories as $category)
-                        <option @selected(old('brand_id', $product->category_id) == $category->id) 
+                        <option @selected(old('category_id', $product->category_id) == $category->id) 
                             value="{{ $category->id }}">
                             {{ $category->name }}
                         </option>

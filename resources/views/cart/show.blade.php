@@ -63,7 +63,12 @@
                         </div>
                     </div>
                     <a href="{{ route('website.products') }}" class="bg-blue-500 text-white font-bold py-2 rounded w-full mt-4 text-center block">Seguir comprando</a>
+                    @if($totalQuantity > 0)
                     <a href="{{ route('cart.confirm.cart') }}" class="bg-blue-500 text-white font-bold py-2 rounded w-full mt-4 text-center block">Continuar compra</a>
+                @else
+                    <span class="bg-gray-400 text-white font-bold py-2 rounded w-full mt-4 text-center block cursor-not-allowed">Continuar compra</span>
+                    <p class="text-red-500 mt-2 text-center">Tu carrito está vacío.</p>
+                @endif
                 </div>
             </div>
         </div>
@@ -75,7 +80,7 @@
         @foreach($recommendedProducts as $product)
             <div class="bg-white rounded-sm shadow-md overflow-hidden">
                 <a href="#">
-                    <img class="p-2 rounded-t-lg object-cover object-center w-full h-64" src="{{ $product->image }}" alt="product image" />
+                    <img class="p-2 rounded-t-lg object-cover object-center w-full h-64" src="{{ $product->image ? Storage::url($product->image) : 'path/to/default-image.jpg' }}" alt="product image" />
                 </a>
                 <div class="px-5 pb-5">
                     <a href="#">

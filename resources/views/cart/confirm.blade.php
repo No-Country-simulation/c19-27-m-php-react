@@ -90,8 +90,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <hr>
-                                <h3 class="text-lg mt-3">Editar tus datos</h3>
+                                <hr class="mb-3">
+                                {{-- <h3 class="text-lg mt-3"></h3> --}}
+                                <a href="{{ route('client.profiles.edit' ) }}" class="text-lg">Editar tus datos</a>
                             </li>
                     </ul> 
             </div>
@@ -113,6 +114,7 @@
                         </div>
                     </div>
                     <a href="{{ route('website.products') }}" class="bg-blue-500 text-white font-bold py-2 rounded w-full mt-4 text-center block">Editar la compra</a>
+                    <a href="{{ route('cart.finished') }}" class="bg-blue-500 text-white font-bold py-2 rounded w-full mt-4 text-center block">Finalizar compra</a>
                 </div>
             </div>
 

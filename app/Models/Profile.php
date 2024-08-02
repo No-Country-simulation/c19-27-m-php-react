@@ -16,6 +16,7 @@ class Profile extends Model
         'date_of_birth',
         'profile_photo',
         'card_information',
+        
     ];
 
     public function user()

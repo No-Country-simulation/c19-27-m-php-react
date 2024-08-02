@@ -30,16 +30,17 @@
            name="dni" 
             class="block mb-2 w-full"
             placeholder="Ingrese el DNI"
-            value="{{ old( 'name', $user->profile->dni) }}"/>
+            value="{{ old( 'name', $user->profile?->dni) }}"/>
 
             <x-label class="mb-2">
                 Fecha de nacimiento
                </x-label>
                <x-input
+               type="date"
                name="date_of_birth" 
                 class="block mb-2 w-full"
                 placeholder="Ingrese la fecha de nacimiento"
-                value="{{ old( 'name', $user->profile->date_of_birth) }}"/>
+                value="{{ old( 'name', $user->profile?->date_of_birth) }}"/>
 
                 <x-label class="mb-2">
                     Celular
@@ -142,7 +143,7 @@
         </x-button>
         <!-- Botón de actualizar -->
         <x-button>
-            <a href="{{ route('client.profiles.show') }}">volver</a>
+            <a href="{{ route('cart.confirm.cart') }}">Volver</a>
         </x-button>
     </div>
  

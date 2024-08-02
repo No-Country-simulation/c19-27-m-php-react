@@ -24,6 +24,7 @@ class CartController extends Controller
 
 
         $cart = $user->carts()->where('state', 1)->first();
+        $totalQuantity = 0; // Inicializa la variable para la cantidad total de productos
 
         $total = 0;
 
@@ -35,6 +36,7 @@ class CartController extends Controller
 
             foreach ($cart->products as $product) {
                 $total += $product->pivot->quantity * $product->price;
+                $totalQuantity += $product->pivot->quantity; // Suma las cantidades de cada producto
             }
         }
 
@@ -42,7 +44,7 @@ class CartController extends Controller
         $recommendedProducts = Product::inRandomOrder()->take(4)->get();
 
 
-        return view('cart.show', compact('products', 'total', 'cart', 'recommendedProducts'));
+        return view('cart.show', compact('products', 'total', 'cart', 'recommendedProducts', 'totalQuantity'));
     }
 
 
@@ -140,9 +142,12 @@ class CartController extends Controller
 
     public function finished()
     {
-        DB::transaction(function () {
-
-
+        $billId = null;
+        $total = 0;
+        $products = collect(); // Inicializar como colección vacía para evitar errores si no hay carrito.
+    
+        DB::transaction(function () use (&$billId, &$total, &$products) {
+            
             $sesion = Auth::user();
             $user = User::find($sesion->id);
 
@@ -156,11 +161,10 @@ class CartController extends Controller
                     'state' => 1
                 ]);
 
-
-
+                $total = 0;
                 $products = $cart->products()->orderBy('name')->get();
 
-                $total = 0;
+                
 
                 foreach ($products as $product) {
 
@@ -180,17 +184,22 @@ class CartController extends Controller
 
                 $bill->total = $total;
                 $bill->save();
+                $billId = $bill->id; // Guarda el ID para usar fuera del callback
 
                 $cart->state = 0;
                 $cart->save();
-
+   
+              
             }
-
         });
-
-
+        
+        if ($billId) {
+            $bill = Bill::with('products')->find($billId); // Asegúrate de cargar la factura con productos
+            return view('cart.finished', compact('bill', 'total', 'products'));
+        } else {
+            return redirect()->route('cart.show.cart')->with('error', 'No hay un carrito activo.');
+        }
     }
-
     public function showBill(Bill $bill){
 
     return view('cart.bill', compact('bill'));

@@ -95,6 +95,11 @@ class CartController extends Controller
             'product_id' => 'required|integer',
             'quantity' => 'required|integer|min:1',
         ]);
+         $user = Auth::user();  // Asigna directamente, no necesitas dos líneas para obtener el ID y luego encontrar al usuario.
+
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Debes iniciar sesión para realizar esta acción.');
+        }
 
         $sesion = Auth::user();
         $aux = $sesion->id;
@@ -260,5 +265,6 @@ class CartController extends Controller
 
         return response()->json($cart, 200);
     }
+
 
 }

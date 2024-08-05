@@ -64,6 +64,12 @@
             'icon' => 'fa-solid fa-basket-shopping',
         ],
         [
+            'name' => 'Mis Facturas',
+            'url' => route('client.bills.index'),
+            'active' => request()->routeIs('client.bills.index'),
+            'icon' => 'fa-solid fa-money-bill',
+        ],
+        [
             'name' => 'Favoritos',
             // 'url' => route('admin.permissions.index'),
             // 'active' => request()->routeIs('admin.permissions.*'),

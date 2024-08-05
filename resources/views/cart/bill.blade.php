@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-semibold mb-4">Factura</h1>
+      
         <div class="bg-white p-4 rounded-lg shadow-md">
             {{-- <h2 class="text-xl font-semibold mb-2">Detalles de la Factura</h2> --}}
             <div class="flex justify-between">

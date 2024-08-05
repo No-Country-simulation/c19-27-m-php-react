@@ -8,7 +8,7 @@
             @else
                 @foreach ($bills as $bill)
                     <div class="mt-6 border-b border-gray-200 pb-4">
-                        <h2 class="text-xl font-semibold">Factura #{{ $bill->id }}</h2>
+                        <h2 class="text-xl font-semibold">Compra #{{ $bill->id }}</h2>
                         <p>Fecha: {{ $bill->date->format('d/m/Y') }}</p>
                         <p>Total: ${{ number_format($bill->total, 2) }}</p>
 

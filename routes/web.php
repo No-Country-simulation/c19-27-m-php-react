@@ -7,6 +7,7 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Client\BillController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Client\ProfileController;
@@ -135,6 +136,8 @@ Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/user/productlist', [CartController::class, 'list'])->name('user.list');
 Route::get('/bill/{bill}', [CartController::class, 'showBill'])->name('bill.show');
 
+
+Route::get('/bills', [BillController::class, 'index'])->name('client.bills.index');
 
 Route::get('/my-purchases', [PurchaseController::class, 'index'])->name('client.purchase.index');
 });
